@@ -1,0 +1,48 @@
+<div class="container">
+  <h2 class="text-center my-4">शाळा भेट अहवाल</h2>
+
+  <div *ngFor="let visit of visits" class="card my-3 shadow p-3">
+    <h4>{{ visit.schoolName }}</h4>
+    <p><strong>मंजूर शिक्षक:</strong> {{ visit.approvedTeachers }}</p>
+    <p><strong>कार्यरत शिक्षक:</strong> {{ visit.workingTeachers }}</p>
+    <p><strong>महिला शिक्षक:</strong> {{ visit.femaleCount }}, <strong>पुरुष शिक्षक:</strong> {{ visit.maleCount }}</p>
+    <p><strong>रिक्त पदे:</strong> {{ visit.vacantTeachers }}</p>
+    <p><strong>उपस्थित शिक्षक:</strong> {{ visit.presentteachers }}</p>
+    
+    <p><strong>भेट दिलेला वर्ग:</strong> {{ visit.visitedClass }} {{ visit.grade }} {{ visit.section }}</p>
+    <p><strong>विद्यार्थी संख्या:</strong> मुले: {{ visit.boysCount }}, मुली: {{ visit.girlsCount }}, एकूण: {{ visit.totalCount }}</p>
+    <p><strong>उपस्थित:</strong> {{ visit.totalPresent }} ({{ visit.attendancePercentagePresent }}), <strong>गैरहजर:</strong> {{ visit.totalAbsent }} ({{ visit.attendancePercentageAbsent }})</p>
+
+    <h5>सुविधा:</h5>
+    <ul>
+      <li *ngFor="let key of getKeys(visit.facilities)">
+        {{ key }}: {{ visit.facilities?.[key] === 'true' ? 'होय' : 'नाही' }}
+      </li>
+    </ul>
+
+    <h5>अभिप्राय:</h5>
+    <p><strong>वाचन:</strong> {{ visit.readingFeedback }}</p>
+    <p><strong>लेखन:</strong> {{ visit.writingFeedback }}</p>
+    <p><strong>गणित:</strong> {{ visit.mathFeedback }}</p>
+    <p><strong>शेरा:</strong> {{ visit.remark }}</p>
+
+    <div class="row">
+      <div class="col-md-3" *ngIf="visit.capturedImageData1">
+        <img [src]="visit.capturedImageData1" class="img-fluid" alt="Image 1">
+        <p>Latitude: {{ visit.latitude1 }}, Longitude: {{ visit.longitude1 }}</p>
+      </div>
+      <div class="col-md-3" *ngIf="visit.capturedImageData2">
+        <img [src]="visit.capturedImageData2" class="img-fluid" alt="Image 2">
+        <p>Latitude: {{ visit.latitude2 }}, Longitude: {{ visit.longitude2 }}</p>
+      </div>
+      <div class="col-md-3" *ngIf="visit.capturedImageData3">
+        <img [src]="visit.capturedImageData3" class="img-fluid" alt="Image 3">
+        <p>Latitude: {{ visit.latitude3 }}, Longitude: {{ visit.longitude3 }}</p>
+      </div>
+      <div class="col-md-3" *ngIf="visit.capturedImageData4">
+        <img [src]="visit.capturedImageData4" class="img-fluid" alt="Image 4">
+        <p>Latitude: {{ visit.latitude4 }}, Longitude: {{ visit.longitude4 }}</p>
+      </div>
+    </div>
+  </div>
+</div>

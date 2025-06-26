@@ -1,0 +1,178 @@
+<form [formGroup]="anganwadiForm" (ngSubmit)="onSubmit()" class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h4 class="card-title text-center mb-4">अंगणवाडी फॉर्म</h4>
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="entryDate" class="form-label">तारीख</label>
+          <input type="date" id="entryDate" class="form-control" formControlName="entryDate" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="projectName" class="form-label">प्रकल्पाचे नाव</label>
+          <input type="text" id="projectName" class="form-control" formControlName="projectName" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="beatName" class="form-label">बीटचे नाव</label>
+          <input type="text" id="beatName" class="form-control" formControlName="beatName" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="anganwadiCenterName" class="form-label">अंगणवाडी केंद्राचे नाव</label>
+          <input type="text" id="anganwadiCenterName" class="form-control" formControlName="anganwadiCenterName" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="anganwadiNumber" class="form-label">अंगणवाडी क्रमांक</label>
+          <input type="text" id="anganwadiNumber" class="form-control" formControlName="anganwadiNumber" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="anganwadiWorkerName" class="form-label">सेविकेचे नाव</label>
+          <input type="text" id="anganwadiWorkerName" class="form-control" formControlName="anganwadiWorkerName" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="workerMobileNumber" class="form-label">मोबाईल क्रमांक</label>
+          <input type="text" id="workerMobileNumber" class="form-control" formControlName="workerMobileNumber" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="workerServiceDurationYears" class="form-label">सेवेचा कालावधी (वर्ष)</label>
+          <input type="number" id="workerServiceDurationYears" class="form-control" formControlName="workerServiceDurationYears" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="workerResponsibility" class="form-label">जवाबदारी</label>
+          <input type="text" id="workerResponsibility" class="form-control" formControlName="workerResponsibility" />
+        </div>
+      </div>
+
+      <hr class="my-4" />
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="beneficiaries0To6Months" class="form-label">० ते ६ महिने लाभार्थी</label>
+          <input type="number" id="beneficiaries0To6Months" class="form-control" formControlName="beneficiaries0To6Months" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="beneficiariesTotal" class="form-label">एकूण लाभार्थी</label>
+          <input type="number" id="beneficiariesTotal" class="form-control" formControlName="beneficiariesTotal" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="foodSupply6Months3Years" class="form-label">६ महिने ते ३ वर्षे अन्नपुरवठा</label>
+          <input type="text" id="foodSupply6Months3Years" class="form-control" formControlName="foodSupply6Months3Years" />
+        </div>
+      </div>
+
+      <hr class="my-4" />
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="drinkingWaterFacility" class="form-label">पिण्याच्या पाण्याची सोय</label>
+          <select id="drinkingWaterFacility" class="form-select" formControlName="drinkingWaterFacility">
+            <option value="">-- निवडा --</option>
+            <option value="Yes">होय</option>
+            <option value="No">नाही</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label for="educationalMaterialAvailable" class="form-label">शैक्षणिक साहित्य उपलब्ध</label>
+          <select id="educationalMaterialAvailable" class="form-select" formControlName="educationalMaterialAvailable">
+            <option value="">-- निवडा --</option>
+            <option value="Yes">होय</option>
+            <option value="No">नाही</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label for="toyMaterialAvailable" class="form-label">खेळणी साहित्य उपलब्ध</label>
+          <select id="toyMaterialAvailable" class="form-select" formControlName="toyMaterialAvailable">
+            <option value="">-- निवडा --</option>
+            <option value="Yes">होय</option>
+            <option value="No">नाही</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label for="medicalCheckupFacility" class="form-label">वैद्यकीय तपासणी सुविधा</label>
+          <select id="medicalCheckupFacility" class="form-select" formControlName="medicalCheckupFacility">
+            <option value="">-- निवडा --</option>
+            <option value="Yes">होय</option>
+            <option value="No">नाही</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="remarks" class="form-label">शेरा</label>
+        <textarea id="remarks" class="form-control" rows="3" formControlName="remarks"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">सबमिट करा</button>
+    </div>
+  </div>
+</form>
+
+<div class="container mt-4">
+  <h2 class="mb-4">अंगणवाडी माहिती</h2>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>तारीख</th>
+        <th>प्रकल्पाचे नाव</th>
+        <th>बीटचे नाव</th>
+        <th>अंगणवाडी केंद्राचे नाव</th>
+        <th>अंगणवाडी क्रमांक</th>
+        <th>सेविकेचे नाव</th>
+        <th>मोबाईल क्रमांक</th>
+        <th>सेवेचा कालावधी</th>
+        <th>जवाबदारी</th>
+        <th>एकूण लाभार्थी</th>
+        <th>अन्नपुरवठा</th>
+        <th>पिण्याच्या पाण्याची सोय</th>
+        <th>शैक्षणिक साहित्य</th>
+        <th>खेळणी साहित्य</th>
+        <th>वैद्यकीय तपासणी</th>
+        <th>शेरा</th>
+        <th>क्रिया</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- CORRECTED CALLS FOR editData and deleteData -->
+      <tr *ngFor="let item of data; let i = index">
+        <td>{{ item.entryDate | date:'dd/MM/yyyy' }}</td> <!-- Optional: format date for display -->
+        <td>{{ item.projectName }}</td>
+        <td>{{ item.beatName }}</td>
+        <td>{{ item.anganwadiCenterName }}</td>
+        <td>{{ item.anganwadiNumber }}</td>
+        <td>{{ item.anganwadiWorkerName }}</td>
+        <td>{{ item.workerMobileNumber }}</td>
+        <td>{{ item.workerServiceDurationYears }}</td>
+        <td>{{ item.workerResponsibility }}</td>
+        <td>{{ item.beneficiariesTotal }}</td>
+        <td>{{ item.foodSupply6Months3Years }}</td>
+        <td>{{ item.drinkingWaterFacility }}</td>
+        <td>{{ item.educationalMaterialAvailable }}</td>
+        <td>{{ item.toyMaterialAvailable }}</td>
+        <td>{{ item.medicalCheckupFacility }}</td>
+        <td>{{ item.remarks }}</td>
+        <td>
+          <!-- Pass the whole 'item' object to editData -->
+          <button class="btn btn-warning btn-sm me-2" (click)="editData(item)">संपादन</button>
+          <!-- Pass 'item.id' and 'i' (index) to deleteData -->
+          <button class="btn btn-danger btn-sm" (click)="deleteData(item.id, i)">हटवा</button>
+        </td>
+      </tr>
+      <!-- Optional: Show a message if no data -->
+      <tr *ngIf="!data || data.length === 0">
+        <td colspan="17" class="text-center">कोणताही डेटा उपलब्ध नाही.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

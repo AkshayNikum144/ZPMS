@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+// /* You can add global styles to this file, and also import other style files */
+// /* You can add global styles to this file, and also import other style files */
+
+// @import 'bootstrap-icons/font/bootstrap-icons.css';
+
+
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// @import '@fortawesome/fontawesome-free/css/all.css';
+// // @import 'mdb-angular-ui-kit/assets/scss/mdb.scss';
+// @use 'mdb-angular-ui-kit/assets/scss/mdb.scss';
+
+// src/styles.scss
+
+// ✅ The @use rule MUST be the very first statement in the file (after comments).
+@use 'mdb-angular-ui-kit/assets/scss/mdb.scss';
+
+/* All other styles and imports can come AFTER the @use rule */
+
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

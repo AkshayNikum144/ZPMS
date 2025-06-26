@@ -1,0 +1,53 @@
+<nav class="navbar">
+  <button class="sidebar-toggle" (click)="onToggleSidebar()">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <div class="navbar-container">
+    <div class="nav-links-main">
+      <div mdbDropdown class="nav-item dropdown">
+        <a mdbDropdownToggle class="nav-link dropdown-toggle">
+          Forms <i class="fas fa-chevron-down"></i>
+        </a>
+        <ul mdbDropdownMenu class="dropdown-menu">
+          <li>
+            <a routerLink="/hospital-form"
+               routerLinkActive="active-link"
+               class="dropdown-item">
+              हॉस्पिटल रुग्ण नोंदणी फॉर्म
+            </a>
+          </li>
+          <li>
+            <a routerLink="/school-info-form"
+               routerLinkActive="active-link"
+               class="dropdown-item">
+              शाळा / विद्यार्थी नोंदणी फॉर्म
+            </a>
+          </li>
+          <li>
+            <a routerLink="/wcd"
+               routerLinkActive="active-link"
+               class="dropdown-item">
+              आंगणवाडी नोंदणी फॉर्म
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="nav-user-section">
+      <span *ngIf="full_name" class="username">
+        <i class="fas fa-user-shield"></i> Welcome, {{ full_name }}
+      </span>
+      <div *ngIf="isPublic && !full_name" class="auth-links">
+        <a routerLink="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a routerLink="/register"><i class="fas fa-user-plus"></i> Register</a>
+      </div>
+      <button *ngIf="!isPublic && full_name"
+              (click)="logout()"
+              class="logout-button">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </div>
+  </div>
+</nav>

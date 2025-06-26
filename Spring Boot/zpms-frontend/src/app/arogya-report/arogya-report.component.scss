@@ -1,0 +1,122 @@
+// Styles similar to the form component for consistency
+:host {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #f0f2f5;
+}
+
+.report-container {
+  width: 100%;
+  max-width: 1200px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+}
+
+.card-header { /* Shared style from form */ }
+.card-body { padding: 1.5rem; }
+
+// Filter Section
+.filter-section {
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+  background-color: #fdfdff;
+}
+
+.filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    label { font-size: 0.9em; margin-bottom: 0.3rem; }
+    .form-control { padding: 0.5rem; }
+  }
+
+  .filter-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem; // align with form controls
+  }
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
+}
+.btn-show { background-color: #007bff; } // Blue
+.btn-remove { background-color: #6c757d; } // Gray
+
+// Table Controls
+.table-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    
+    .btn-excel {
+        background-color: #1d6f42;
+    }
+    
+    .search-box {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        input {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    }
+}
+
+// Table
+.table-responsive {
+    overflow-x: auto;
+}
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    th, td {
+        padding: 0.75rem;
+        text-align: left;
+        border-bottom: 1px solid #dee2e6;
+        vertical-align: middle;
+    }
+    thead th {
+        background-color: #e9ecef;
+        font-weight: 600;
+    }
+    tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+    .btn-action {
+        background-color: #007bff;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .icon-edit::before { // Simple pencil icon
+        content: '📝';
+    }
+    .visit-photo {
+        width: 80px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+    .text-center {
+        text-align: center;
+    }
+}

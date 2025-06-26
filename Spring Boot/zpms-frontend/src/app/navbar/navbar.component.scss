@@ -1,0 +1,254 @@
+/*
+  Modern & Bright Professional Theme
+  - Clean, readable, and highly attractive for dashboards and portals.
+*/
+
+// === 1. A FRESH & CLEAN COLOR PALETTE ===
+:root {
+  --navbar-bg: #ffffff;
+  --navbar-height: 65px;
+  --navbar-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+
+  // A professional blue for accents
+  --primary-color: #3B82F6;
+  --primary-color-light: #EFF6FF;
+  --primary-color-darker: #2563EB; // For hover on primary buttons
+
+  // Text colors
+  --text-main: #1F2937; // Dark gray for high contrast
+  --text-secondary: #4B5563;
+  --text-on-primary: #ffffff; // White text on blue background
+
+  // General styles
+  --border-radius-md: 8px;
+  --border-radius-full: 9999px;
+  --transition-speed: 0.2s;
+}
+
+// === 2. MAIN NAVBAR STYLING ===
+.navbar {
+  display: flex;
+  align-items: center;
+  height: var(--navbar-height);
+  padding: 0 2rem; // Adjusted later for mobile
+  background-color: var(--navbar-bg);
+  box-shadow: var(--navbar-shadow);
+  position: relative;
+  z-index: 900;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-grow: 1; // Ensures it takes available space next to sidebar-toggle
+}
+
+// === 3. NAVIGATION LINKS - THE MAIN ATTRACTION ===
+.nav-links-main a {
+  position: relative;
+  text-decoration: none;
+  color: var(--text-secondary);
+  padding: 0.6rem 1.2rem;
+  margin: 0 0.25rem;
+  border-radius: var(--border-radius-md);
+  font-weight: 600;
+  font-size: 15px;
+  transition: all var(--transition-speed) ease-in-out;
+
+  &:hover {
+    color: var(--text-main);
+    background-color: #F3F4F6;
+  }
+
+  &.active-link {
+    color: var(--primary-color);
+    background-color: var(--primary-color-light);
+  }
+}
+
+// === 4. USER SECTION, AUTH LINKS & LOGOUT BUTTON ===
+.nav-user-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem; // Adjusted gap for better spacing of buttons/icons
+}
+
+.username {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+
+  i {
+    color: var(--primary-color);
+    font-size: 1.25rem;
+  }
+}
+
+// Styling for Login/Register Auth Links as Buttons
+.auth-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; // Space between Login and Register buttons
+}
+
+.auth-links a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; // Space between icon and text
+  text-decoration: none;
+  border: 2px solid transparent; // Base border
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--border-radius-md);
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all var(--transition-speed) ease-in-out;
+
+  i {
+    font-size: 1em; // Match text size or slightly larger
+  }
+
+  // Specific style for "Login" (Primary Button)
+  &[routerLink="/login"] {
+    background-color: var(--primary-color);
+    color: var(--text-on-primary);
+    border-color: var(--primary-color);
+
+    &:hover {
+      background-color: var(--primary-color-darker);
+      border-color: var(--primary-color-darker);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 6px rgba(59, 130, 246, 0.2);
+    }
+  }
+
+  // Specific style for "Register" (Secondary/Outline Button)
+  &[routerLink="/register"] {
+    background-color: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+
+    &:hover {
+      background-color: var(--primary-color-light);
+      color: var(--primary-color-darker);
+      border-color: var(--primary-color-darker);
+      // transform: translateY(-1px); // Optional
+    }
+  }
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; // Space between icon and text
+  background-color: var(--primary-color);
+  color: var(--text-on-primary);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--border-radius-md);
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all var(--transition-speed) ease-in-out;
+
+  i {
+    font-size: 1em;
+  }
+
+  &:hover {
+    background-color: var(--primary-color-darker);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+}
+
+// === 5. SIDEBAR TOGGLE & RESPONSIVE DESIGN ===
+.sidebar-toggle {
+  display: none; // Hidden on desktop
+  background: transparent;
+  border: 2px solid transparent;
+  color: var(--text-main);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-right: 1rem; // Space between toggle and navbar-container
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-speed) ease;
+
+  &:hover {
+    background-color: #F3F4F6;
+    color: var(--primary-color);
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar {
+    padding: 0 1rem; // Reduced padding for the whole navbar
+  }
+  .nav-links-main {
+    display: none; // Main desktop links hidden
+  }
+  .sidebar-toggle {
+    display: block; // Sidebar toggle becomes visible
+  }
+
+  .username span { // Hide "Welcome, username" text
+    display: none;
+  }
+  .username i { // Ensure user icon is visible
+    font-size: 1.35rem; // Make user icon a bit more prominent
+  }
+
+  // Auth Links (Login/Register) and Logout Button become icon-only
+  .auth-links a,
+  .logout-button {
+    padding: 0.6rem; // Square-ish padding for icon buttons
+    font-size: 1.1rem; // Affects icon size if using em for icon font-size
+
+    span { // Hide text
+      display: none;
+    }
+    i { // Icon adjustments
+      margin-right: 0; // No margin as text is hidden
+      font-size: 1.2rem; // Explicit icon size for mobile
+    }
+  }
+  .auth-links {
+    gap: 0.5rem; // Reduce gap between icon buttons
+  }
+  .nav-user-section {
+      gap: 0.75rem; // Reduce gap in user section
+  }
+}
+
+@media (max-width: 480px) { // For very small screens
+  .navbar {
+    padding: 0 0.75rem;
+  }
+  .sidebar-toggle {
+    font-size: 1.3rem;
+    padding: 0.4rem;
+    margin-right: 0.75rem;
+  }
+  .username i {
+    font-size: 1.25rem;
+  }
+
+  .auth-links a,
+  .logout-button {
+    padding: 0.5rem; // Slightly smaller padding
+    i {
+      font-size: 1.1rem; // Slightly smaller icons
+    }
+  }
+  .nav-user-section {
+      gap: 0.5rem;
+  }
+}

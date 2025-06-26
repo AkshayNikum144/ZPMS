@@ -1,0 +1,104 @@
+<div class="container mt-5">
+  <div class="card shadow-lg border-0 rounded-4">
+    <div class="card-header bg-primary text-white rounded-top-4">
+      <h4 class="mb-0"><i class="bi bi-pencil-square me-2"></i> उद्दिष्टांची नोंद करा</h4>
+    </div>
+
+    <div class="card-body">
+      <form #objectiveForm="ngForm" (ngSubmit)="onSubmit(objectiveForm)">
+
+        <!-- Submission Message -->
+        <div *ngIf="submissionMessage"
+             class="alert mt-2"
+             [ngClass]="{'alert-success': !isError, 'alert-danger': isError}">
+          {{ submissionMessage }}
+        </div>
+
+        <div class="row g-4">
+          <!-- Taluka -->
+          <div class="col-md-6">
+            <label for="taluka" class="form-label fw-semibold">तालुका <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <span class="input-group-text bg-light"><i class="bi bi-geo-alt-fill"></i></span>
+              <select id="taluka"
+                      name="taluka"
+                      class="form-select"
+                      [(ngModel)]="objective.taluka"
+                      (ngModelChange)="onTalukaChange()"
+                      required
+                      #talukaModel="ngModel"
+                      [class.is-invalid]="talukaModel.invalid && talukaModel.touched">
+                <option [ngValue]="null" disabled>तालुका निवडा</option>
+                <option *ngFor="let talukaName of talukas" [value]="talukaName">{{ talukaName }}</option>
+              </select>
+            </div>
+            <div *ngIf="talukaModel.invalid && talukaModel.touched" class="invalid-feedback d-block">
+              कृपया तालुका निवडा.
+            </div>
+          </div>
+
+          <!-- Anganwadi -->
+          <div class="col-md-6">
+            <label for="anganwadi" class="form-label fw-semibold">अंगणवाडी <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <span class="input-group-text bg-light"><i class="bi bi-house-heart-fill"></i></span>
+              <select id="anganwadi"
+                      name="anganwadiCenterName"
+                      class="form-select"
+                      [(ngModel)]="objective.anganwadiCenterName"
+                      required
+                      [disabled]="!objective.taluka || filteredAnganwadis.length === 0"
+                      #anganwadiNameModel="ngModel"
+                      [class.is-invalid]="anganwadiNameModel.invalid && anganwadiNameModel.touched">
+                <option [ngValue]="null" disabled>अंगणवाडी निवडा</option>
+                <option *ngFor="let aw of filteredAnganwadis" [value]="aw.anganwadiCenterName">
+                  {{ aw.anganwadiCenterName }} (क्र: {{ aw.anganwadiNumber }})
+                </option>
+              </select>
+            </div>
+            <div *ngIf="anganwadiNameModel.invalid && anganwadiNameModel.touched" class="invalid-feedback d-block">
+              कृपया अंगणवाडी निवडा.
+            </div>
+            <small *ngIf="objective.taluka && filteredAnganwadis.length === 0 && !isLoading && talukas.length > 0"
+                   class="form-text text-muted">
+              या तालुक्यासाठी अंगणवाडी उपलब्ध नाहीत.
+            </small>
+          </div>
+
+          <!-- Objective Date -->
+          <div class="col-md-6">
+            <label for="objectiveDate" class="form-label fw-semibold">उद्दिष्ट दिनांक <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <span class="input-group-text bg-light"><i class="bi bi-calendar-date-fill"></i></span>
+              <input type="date"
+                     id="objectiveDate"
+                     name="objectiveDate"
+                     class="form-control"
+                     [(ngModel)]="objective.objectiveDate"
+                     required
+                     placeholder="yyyy-mm-dd"
+                     #objectiveDateModel="ngModel"
+                     [class.is-invalid]="objectiveDateModel.invalid && objectiveDateModel.touched">
+            </div>
+            <div *ngIf="objectiveDateModel.invalid && objectiveDateModel.touched" class="invalid-feedback d-block">
+              कृपया उद्दिष्ट दिनांक निवडा.
+            </div>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="mt-4 pt-3 border-top text-end">
+          <button type="submit" class="btn btn-success me-2 px-4" [disabled]="objectiveForm.invalid || isLoading">
+            <i class="bi bi-check-circle me-1"></i>
+            <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+            सबमिट
+          </button>
+          <button type="button" class="btn btn-outline-danger px-4" (click)="onReset(objectiveForm)" [disabled]="isLoading">
+            <i class="bi bi-x-circle me-1"></i> रिसेट
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

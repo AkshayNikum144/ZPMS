@@ -1,0 +1,104 @@
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-light">
+  <div class="row shadow rounded-4 overflow-hidden bg-white" style="max-width: 1200px; width: 100%;">
+
+    <!-- Left Image Column -->
+    <div class="col-md-5 d-none d-md-flex align-items-center justify-content-center bg-white p-4">
+      <img src="/reg1.jpg" alt="Registration" class="img-fluid" style="max-height: 450px;" />
+    </div>
+
+    <!-- Right Form Column -->
+    <div class="col-md-7 p-4">
+      <h2 class="text-center mb-4 text-primary fw-bold">जिल्हा परिषद वापरकर्ता नोंदणी</h2>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="row g-3">
+
+          <div class="col-md-6">
+            <label class="form-label">पूर्ण नाव</label>
+            <input formControlName="fullName" class="form-control" placeholder="पूर्ण नाव टाका" />
+            <div *ngIf="registerForm.get('fullName')?.invalid && registerForm.get('fullName')?.touched" class="text-danger">
+              पूर्ण नाव आवश्यक आहे.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">ईमेल</label>
+            <input formControlName="email" class="form-control" type="email" placeholder="ईमेल टाका" />
+            <div *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.touched" class="text-danger">
+              <div *ngIf="registerForm.get('email')?.errors?.['required']">ईमेल आवश्यक आहे.</div>
+              <div *ngIf="registerForm.get('email')?.errors?.['email']">योग्य ईमेल फॉरमॅट टाका.</div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">मोबाईल नंबर</label>
+            <input formControlName="mobile" class="form-control" placeholder="१० अंकी मोबाईल नंबर टाका" maxlength="10" />
+            <div *ngIf="registerForm.get('mobile')?.errors && registerForm.get('mobile')?.touched" class="text-danger">
+              <div *ngIf="registerForm.get('mobile')?.errors?.['required']">मोबाईल नंबर आवश्यक आहे.</div>
+              <div *ngIf="registerForm.get('mobile')?.errors?.['pattern']">१० अंकी मोबाईल नंबर हवा.</div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">विभाग निवडा</label>
+            <select formControlName="department" class="form-select">
+              <option value="">-- विभाग निवडा --</option>
+              <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
+            </select>
+            <div *ngIf="registerForm.get('department')?.invalid && registerForm.get('department')?.touched" class="text-danger">
+              विभाग निवडणे आवश्यक आहे.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">पासवर्ड</label>
+            <input formControlName="password" class="form-control" type="password" placeholder="पासवर्ड टाका" />
+            <div *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.touched" class="text-danger">
+              <div *ngIf="registerForm.get('password')?.errors?.['required']">पासवर्ड आवश्यक आहे.</div>
+              <div *ngIf="registerForm.get('password')?.errors?.['minlength']">किमान ६ अक्षरे आवश्यक.</div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">पासवर्ड पुन्हा टाका</label>
+            <input formControlName="confirmPassword" class="form-control" type="password" placeholder="पासवर्ड पुन्हा टाका" />
+            <div *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.hasError('passwordMismatch')" class="text-danger">
+              पासवर्ड जुळले नाहीत.
+            </div>
+            <div *ngIf="registerForm.get('confirmPassword')?.errors?.['required'] && registerForm.get('confirmPassword')?.touched" class="text-danger">
+              पुन्हा पासवर्ड आवश्यक आहे.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">भूमिका (Role)</label>
+            <select formControlName="role" class="form-select">
+              <option value="">-- भूमिका निवडा --</option>
+              <option value="ADMIN">प्रशासक (Admin)</option>
+              <option value="OFFICER">अधिकारी (Officer)</option>
+              <option value="FIELD">मैदानी अधिकारी (Field Officer)</option>
+            </select>
+            <div *ngIf="registerForm.get('role')?.invalid && registerForm.get('role')?.touched" class="text-danger">
+              भूमिका निवडणे आवश्यक आहे.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">प्रोफाईल फोटो</label>
+            <input type="file" (change)="onFileChange($event)" class="form-control" accept="image/*" />
+          </div>
+        </div>
+
+        <div class="d-grid gap-2 mt-4">
+          <button class="btn btn-success" type="submit" [disabled]="registerForm.invalid || !selectedFile">
+            नोंदणी करा
+          </button>
+        </div>
+
+        <div class="mt-3 text-center" *ngIf="message" [ngClass]="{'text-success fw-bold': message.includes('यशस्वी'), 'text-danger fw-bold': !message.includes('यशस्वी')}">
+          {{ message }}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

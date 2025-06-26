@@ -1,0 +1,230 @@
+
+<!---
+<div class="container-fluid mt-3">
+  
+  <h2 class="mb-4">शालेय उद्दिष्टांचा अहवाल</h2>
+  <div *ngIf="isLoading" class="alert alert-info text-center">
+    <div class="spinner-border spinner-border-sm me-2" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    Loading school data...
+  </div>
+  <div class="card shadow-sm mb-4" *ngIf="!isLoading">
+    <div class="card-body">
+      <div class="row g-3 align-items-end">
+        <div class="col-md-3">
+          <label for="talukaFilter" class="form-label">तालुका निवडा:</label>
+          <select id="talukaFilter" class="form-select" [(ngModel)]="selectedTaluka" (ngModelChange)="onTalukaChange()">
+            <option *ngFor="let taluka of availableTalukas" [value]="taluka">{{ taluka }}</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="schoolFilter" class="form-label">शाळा निवडा:</label>
+          <select id="schoolFilter" class="form-select" [(ngModel)]="selectedSchoolName" (ngModelChange)="applyFilters()">
+             <option *ngFor="let name of availableSchoolNames" [value]="name">{{ name }}</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="fromDate" class="form-label">From Date:</label>
+          <input type="date" id="fromDate" class="form-control" [(ngModel)]="fromDate" (ngModelChange)="applyFilters()">
+        </div>
+        <div class="col-md-2">
+          <label for="toDate" class="form-label">To Date:</label>
+          <input type="date" id="toDate" class="form-control" [(ngModel)]="toDate" (ngModelChange)="applyFilters()">
+        </div>
+        <div class="col-md-2 d-flex">
+          <button class="btn btn-primary me-2 flex-grow-1" (click)="onShowClick()">Show</button>
+          <button class="btn btn-danger flex-grow-1" (click)="onRemoveFiltersClick()">Remove</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between align-items-center mb-3" *ngIf="!isLoading">
+    <div>
+      <button class="btn btn-success" (click)="exportToExcel()" [disabled]="filteredSchools.length === 0">
+        <i class="fas fa-file-excel me-1"></i> Excel
+      </button>
+    </div>
+    <div class="d-flex align-items-center">
+      <label for="showEntries" class="form-label me-2 mb-0">Show</label>
+      <select id="showEntries" class="form-select form-select-sm me-2" style="width: auto;" [(ngModel)]="entriesToShow">
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option [value]="allSchools.length">All</option>
+      </select>
+      <span class="me-3">entries</span>
+      <label for="searchTable" class="form-label me-2 mb-0">Search:</label>
+      <input type="text" id="searchTable" class="form-control form-control-sm" style="width: auto;" placeholder="Search table..." [(ngModel)]="searchTerm" (ngModelChange)="applyFilters()">
+    </div>
+  </div>
+
+
+
+  <div class="table-responsive" *ngIf="!isLoading">
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>Sr. No.</th>
+          <th>Taluka</th>
+          <th>School Name</th>
+          <th>Visit Date</th>
+          <th>School Type</th>
+          <th>Headmaster Name</th>
+          <th>Mobile No.</th>
+          <th>UDISE No.</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="filteredSchools.length === 0">
+          <td colspan="9" class="text-center fst-italic py-3">No matching school data found for the selected filters.</td>
+        </tr>
+        <tr *ngFor="let school of filteredSchools | slice:0:entriesToShow; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ school.taluka }}</td>
+          <td>{{ school.schoolName }}</td>
+          <td>{{ school.date | date:'dd-MM-yyyy' }}</td>
+          <td>{{ getSchoolType(school.category) }}</td>
+          <td>{{ school.headmastersName }}</td>
+          <td>{{ school.headmastersMobileNumber }}</td>
+          <td>{{ school.udiseNumber }}</td>
+
+          <td>
+            <button *ngIf="isReportPending(school)"
+                    class="btn btn-secondary btn-sm" disabled>
+              <i class="fas fa-clock me-1"></i> अहवाल प्रलंबित आहे
+            </button>
+
+            <button *ngIf="canFillReport(school)"
+                    class="btn btn-primary btn-sm"
+                    (click)="navigateToFillVisitForm(school.id)">
+              <i class="fas fa-pencil-alt me-1"></i> उद्दिष्टांची माहिती भरा
+            </button>
+
+            <button *ngIf="canViewReport(school)"
+                    class="btn btn-info btn-sm view-button"
+                    (click)="navigateToViewVisitReport(school.id)">
+              <span class="me-1">👁</span> उद्दिष्टांची माहिती पहा
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->
+
+<div class="container-fluid mt-3">
+  <h2 class="mb-4">शालेय उद्दिष्टांचा अहवाल</h2>
+  <div *ngIf="isLoading" class="alert alert-info text-center">
+    <div class="spinner-border spinner-border-sm me-2" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    Loading school data...
+  </div>
+  <div class="card shadow-sm mb-4" *ngIf="!isLoading">
+    <div class="card-body">
+      <div class="row g-3 align-items-end">
+        <div class="col-md-3">
+          <label for="talukaFilter" class="form-label">तालुका निवडा:</label>
+          <select id="talukaFilter" class="form-select" [(ngModel)]="selectedTaluka" (ngModelChange)="onTalukaChange()">
+            <option *ngFor="let taluka of availableTalukas" [value]="taluka">{{ taluka }}</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="schoolFilter" class="form-label">शाळा निवडा:</label>
+          <select id="schoolFilter" class="form-select" [(ngModel)]="selectedSchoolName" (ngModelChange)="applyFilters()">
+             <option *ngFor="let name of availableSchoolNames" [value]="name">{{ name }}</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="fromDate" class="form-label">From Date:</label>
+          <input type="date" id="fromDate" class="form-control" [(ngModel)]="fromDate" (ngModelChange)="applyFilters()">
+        </div>
+        <div class="col-md-2">
+          <label for="toDate" class="form-label">To Date:</label>
+          <input type="date" id="toDate" class="form-control" [(ngModel)]="toDate" (ngModelChange)="applyFilters()">
+        </div>
+        <div class="col-md-2 d-flex">
+          <button class="btn btn-primary me-2 flex-grow-1" (click)="onShowClick()">Show</button>
+          <button class="btn btn-danger flex-grow-1" (click)="onRemoveFiltersClick()">Remove</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between align-items-center mb-3" *ngIf="!isLoading">
+    <div>
+      <button class="btn btn-success" (click)="exportToExcel()" [disabled]="filteredSchools.length === 0">
+        <i class="fas fa-file-excel me-1"></i> Excel
+      </button>
+    </div>
+    <div class="d-flex align-items-center">
+      <label for="showEntries" class="form-label me-2 mb-0">Show</label>
+      <select id="showEntries" class="form-select form-select-sm me-2" style="width: auto;" [(ngModel)]="entriesToShow">
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option [value]="allSchools.length">All</option>
+      </select>
+      <span class="me-3">entries</span>
+      <label for="searchTable" class="form-label me-2 mb-0">Search:</label>
+      <input type="text" id="searchTable" class="form-control form-control-sm" style="width: auto;" placeholder="Search table..." [(ngModel)]="searchTerm" (ngModelChange)="applyFilters()">
+    </div>
+  </div>
+
+
+  <!-- Data Table -->
+  <div class="table-responsive" *ngIf="!isLoading">
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>Sr. No.</th>
+          <th>Taluka</th>
+          <th>School Name</th>
+          <th>Visit Date</th>
+          <th>School Type</th>
+          <th>Headmaster Name</th>
+          <th>Mobile No.</th>
+          <th>UDISE No.</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="filteredSchools.length === 0">
+          <td colspan="9" class="text-center fst-italic py-3">No matching school data found for the selected filters.</td>
+        </tr>
+        <tr *ngFor="let school of filteredSchools | slice:0:entriesToShow; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ school.taluka }}</td>
+          <td>{{ school.schoolName }}</td>
+          <td>{{ school.date | date:'dd-MM-yyyy' }}</td>
+          <td>{{ getSchoolType(school.category) }}</td>
+          <td>{{ school.headmastersName }}</td>
+          <td>{{ school.headmastersMobileNumber }}</td>
+          <td>{{ school.udiseNumber }}</td>
+
+          <td>
+            <button *ngIf="isReportPending(school)"
+                    class="btn btn-secondary btn-sm" disabled>
+              <i class="fas fa-clock me-1"></i> अहवाल प्रलंबित आहे
+            </button>
+
+            <button *ngIf="canFillReport(school)"
+                    class="btn btn-primary btn-sm"
+                    (click)="navigateToFillVisitForm(school.id)">
+              <i class="fas fa-pencil-alt me-1"></i> उद्दिष्टांची माहिती भरा
+            </button>
+
+            <button *ngIf="canViewReport(school)"
+                    class="btn btn-info btn-sm view-button"
+                    (click)="navigateToViewVisitReport(school.id)">
+              <span class="me-1">👁</span> उद्दिष्टांची माहिती पहा
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

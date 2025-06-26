@@ -1,0 +1,82 @@
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h4 class="card-title text-center text-primary mb-4">शाळा अहवाल नोंद करा</h4>
+      <form [formGroup]="reportForm" (ngSubmit)="onSubmit()">
+        <div class="row g-3 mb-3">
+          <!-- Taluka -->
+          <div class="col-md-4">
+            <label for="taluka" class="form-label">तालुका <span class="text-danger">*</span></label>
+            <select id="taluka" class="form-select" formControlName="taluka"
+                    [class.is-invalid]="isInvalid('taluka')">
+              <option value="" disabled selected>तालुका निवडा</option>
+              <option *ngFor="let taluka of talukas" [value]="taluka">
+                {{ taluka }}
+              </option>
+            </select>
+            <div *ngIf="isInvalid('taluka') && reportForm.get('taluka')?.hasError('required')" class="invalid-feedback">
+              तालुका आवश्यक आहे
+            </div>
+          </div>
+
+          <!-- School Name -->
+          <div class="col-md-4">
+            <label for="schoolName" class="form-label">शाळेचे नाव <span class="text-danger">*</span></label>
+            <select id="schoolName" class="form-select" formControlName="schoolName"
+                    [disabled]="!reportForm.get('taluka')?.value || schoolNames.length === 0"
+                    [class.is-invalid]="isInvalid('schoolName')">
+              <option value="" disabled selected>
+                {{ !reportForm.get('taluka')?.value ? 'कृपया आधी तालुका निवडा' : (schoolNames.length === 0 && !isLoading ? 'या तालुक्यात शाळा नाहीत' : 'शाळा निवडा') }}
+              </option>
+              <option *ngFor="let name of schoolNames" [value]="name">
+                {{ name }}
+              </option>
+            </select>
+            <div *ngIf="isInvalid('schoolName') && reportForm.get('schoolName')?.hasError('required')" class="invalid-feedback">
+              शाळेचे नाव आवश्यक आहे
+            </div>
+          </div>
+
+          <!-- School Type -->
+          <div class="col-md-4">
+            <label for="schoolType" class="form-label">शालेय प्रकार <span class="text-danger">*</span></label>
+            <select id="schoolType" class="form-select" formControlName="schoolType"
+                    [class.is-invalid]="isInvalid('schoolType')">
+              <option value="" disabled selected>शालेय प्रकार निवडा</option>
+              <option *ngFor="let type of schoolTypes" [value]="type">
+                {{ type }}
+              </option>
+            </select>
+            <div *ngIf="isInvalid('schoolType') && reportForm.get('schoolType')?.hasError('required')" class="invalid-feedback">
+              शालेय प्रकार आवश्यक आहे
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-4">
+          <!-- Visit Date -->
+          <div class="col-md-4">
+            <label for="visitDate" class="form-label">भेटीचा दिनांक <span class="text-danger">*</span></label>
+            <input type="date" id="visitDate" class="form-control" formControlName="visitDate"
+                   placeholder="dd-mm-yyyy"
+                   [class.is-invalid]="isInvalid('visitDate')">
+            <div *ngIf="isInvalid('visitDate') && reportForm.get('visitDate')?.hasError('required')" class="invalid-feedback">
+              भेटीचा दिनांक आवश्यक आहे
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center gap-2">
+          <button type="submit" class="btn btn-success btn-lg" [disabled]="isLoading">
+            <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+            <span *ngIf="isLoading">सबमिट करत आहे...</span>
+            <span *ngIf="!isLoading">माहिती सबमिट करा</span>
+          </button>
+          <button type="button" class="btn btn-outline-danger btn-lg" (click)="onReset()" [disabled]="isLoading">
+            रिसेट
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

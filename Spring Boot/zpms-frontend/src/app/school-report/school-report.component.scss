@@ -1,0 +1,16 @@
+// You can add custom styles here if needed, but Bootstrap provides a lot.
+
+// Example: if you want the card to have a max-width and be centered
+.container {
+  max-width: 900px; // Or your preferred max width
+}
+
+// Ensure labels with asterisks are clear
+.form-label .text-danger {
+  margin-left: 2px;
+}
+
+// Specific styling for the submit button with spinner
+.btn-success {
+  min-width: 180px; // Ensure button doesn't jump size too much
+}

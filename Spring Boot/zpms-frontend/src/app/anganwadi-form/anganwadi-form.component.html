@@ -1,0 +1,301 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="container mt-5">
+  <div class="card shadow-lg">
+    <div class="card-header bg-primary text-white text-center fs-4">
+      अंगणवाडी तपासणी फॉर्म
+    </div>
+    <div class="card-body">
+      <form [formGroup]="inspectionForm" (ngSubmit)="onSubmit()">
+        <div class="row g-3">
+          <!-- तालुका & गाव -->
+          <div class="col-md-6">
+            <label class="form-label">तालुका:</label>
+            <input class="form-control" formControlName="taluka" placeholder="तालुका लिहा">
+            <div *ngIf="inspectionForm.get('taluka')?.invalid && (inspectionForm.get('taluka')?.dirty || inspectionForm.get('taluka')?.touched)" class="text-danger small">
+              तालुका आवश्यक आहे.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">गावाचे नाव:</label>
+            <input class="form-control" formControlName="villageName" placeholder="गावाचे नाव लिहा">
+             <div *ngIf="inspectionForm.get('villageName')?.invalid && (inspectionForm.get('villageName')?.dirty || inspectionForm.get('villageName')?.touched)" class="text-danger small">
+              गावाचे नाव आवश्यक आहे.
+            </div>
+          </div>
+
+          <!-- क्रमांक & नाव -->
+          <div class="col-md-6">
+            <label class="form-label">अंगणवाडी क्रमांक:</label>
+            <input class="form-control" formControlName="anganwadiNumber" placeholder="अंगणवाडी क्रमांक लिहा">
+             <div *ngIf="inspectionForm.get('anganwadiNumber')?.invalid && (inspectionForm.get('anganwadiNumber')?.dirty || inspectionForm.get('anganwadiNumber')?.touched)" class="text-danger small">
+              अंगणवाडी क्रमांक आवश्यक आहे.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">सेविकेचे नाव (Supervisor Name):</label>
+            <input class="form-control" formControlName="supervisorName" placeholder="सेविकेचे नाव लिहा">
+             <div *ngIf="inspectionForm.get('supervisorName')?.invalid && (inspectionForm.get('supervisorName')?.dirty || inspectionForm.get('supervisorName')?.touched)" class="text-danger small">
+              सेविकेचे नाव आवश्यक आहे.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">मदतनीस नाव (Matanisa Name):</label>
+            <input class="form-control" formControlName="matanisaName" placeholder="मदतनीस नाव लिहा">
+             <div *ngIf="inspectionForm.get('matanisaName')?.invalid && (inspectionForm.get('matanisaName')?.dirty || inspectionForm.get('matanisaName')?.touched)" class="text-danger small">
+              मदतनीस नाव आवश्यक आहे.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">मदतनीस उपस्थित होता का?</label>
+            <select class="form-select" formControlName="wasMatanisaPresent">
+              <option value="" disabled selected>निवडा</option>
+              <option value="हो">हो (Yes)</option>
+              <option value="नाही">नाही (No)</option>
+              <option value="सेविका फक्त">सेविका फक्त (Worker Only)</option>
+              <option value="मदतनीस फक्त">मदतनीस फक्त (Helper Only)</option>
+            </select>
+            <div *ngIf="inspectionForm.get('wasMatanisaPresent')?.invalid && (inspectionForm.get('wasMatanisaPresent')?.dirty || inspectionForm.get('wasMatanisaPresent')?.touched)" class="text-danger small">
+              निवड आवश्यक आहे.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">केंद्र व परिसर स्वच्छ होता का?</label>
+            <select class="form-select" formControlName="centerClean">
+              <option value="" disabled selected>निवडा</option>
+              <option value="हो">हो (Yes)</option>
+              <option value="नाही">नाही (No)</option>
+              <option value="अंशतः">अंशतः (Partially)</option>
+            </select>
+            <div *ngIf="inspectionForm.get('centerClean')?.invalid && (inspectionForm.get('centerClean')?.dirty || inspectionForm.get('centerClean')?.touched)" class="text-danger small">
+              निवड आवश्यक आहे.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">अंगणवाडी प्रकार (श्रेणी - Center Category):</label>
+            <select class="form-select" formControlName="centerType">
+              <option value="" disabled selected>निवडा</option>
+              <option value="मुख्य">मुख्य (Main)</option>
+              <option value="मिनी">मिनी (Mini)</option>
+            </select>
+            <div *ngIf="inspectionForm.get('centerType')?.invalid && (inspectionForm.get('centerType')?.dirty || inspectionForm.get('centerType')?.touched)" class="text-danger small">
+              निवड आवश्यक आहे.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">इमारत प्रकार (Building Type):</label>
+            <select class="form-select" formControlName="buildingType">
+              <option value="" disabled selected>निवडा</option>
+              <option value="स्वतःची">स्वतःची (Own)</option>
+              <option value="भाड्याची">भाड्याची (Rented)</option>
+              <option value="समुदाय">समुदाय (Community)</option>
+              <option value="इतर">इतर (Other)</option>
+            </select>
+            <div *ngIf="inspectionForm.get('buildingType')?.invalid && (inspectionForm.get('buildingType')?.dirty || inspectionForm.get('buildingType')?.touched)" class="text-danger small">
+              निवड आवश्यक आहे.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">शौचालय आहे का?</label>
+            <select class="form-select" formControlName="hasToilet">
+              <option value="" disabled selected>निवडा</option>
+              <option value="हो">हो (Yes)</option>
+              <option value="नाही">नाही (No)</option>
+            </select>
+            <div *ngIf="inspectionForm.get('hasToilet')?.invalid && (inspectionForm.get('hasToilet')?.dirty || inspectionForm.get('hasToilet')?.touched)" class="text-danger small">
+              निवड आवश्यक आहे.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">शौचालय वापरात आहे का?</label>
+            <select class="form-select" formControlName="toiletUsable">
+              <option value="" disabled selected>निवडा</option>
+              <option value="नियमितपणे">नियमितपणे (Regularly)</option>
+              <option value="अधूनमधून">अधूनमधून (Occasionally)</option>
+              <option value="वापरात नाही">वापरात नाही (Not Used)</option>
+              <option value="लागू नाही">लागू नाही (N/A - if no toilet)</option>
+            </select>
+             <div *ngIf="inspectionForm.get('toiletUsable')?.invalid && (inspectionForm.get('toiletUsable')?.dirty || inspectionForm.get('toiletUsable')?.touched)" class="text-danger small">
+              निवड आवश्यक आहे.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">पिण्याच्या पाण्याची सोय?</label>
+            <select class="form-select" formControlName="drinkingWaterAvailable">
+              <option value="" disabled selected>निवडा</option>
+              <option value="नळ पाणी">नळ पाणी (Tap Water)</option>
+              <option value="बोरवेल">बोरवेल (Borewell)</option>
+              <option value="टँकर">टँकर (Tanker)</option>
+              <option value="उपलब्ध नाही">उपलब्ध नाही (Not Available)</option>
+              <option value="इतर">इतर (Other)</option>
+            </select>
+            <div *ngIf="inspectionForm.get('drinkingWaterAvailable')?.invalid && (inspectionForm.get('drinkingWaterAvailable')?.dirty || inspectionForm.get('drinkingWaterAvailable')?.touched)" class="text-danger small">
+              निवड आवश्यक आहे.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">तपासणीची तारीख:</label>
+            <input type="date" class="form-control" formControlName="inspectionDate">
+            <div *ngIf="inspectionForm.get('inspectionDate')?.invalid && (inspectionForm.get('inspectionDate')?.dirty || inspectionForm.get('inspectionDate')?.touched)" class="text-danger small">
+              तारीख आवश्यक आहे.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">वीज पुरवठा?</label>
+            <select class="form-select" formControlName="electricitySupply">
+              <option value="" disabled selected>निवडा</option>
+              <option value="उपलब्ध">उपलब्ध (Available)</option>
+              <option value="उपलब्ध नाही">उपलब्ध नाही (Not Available)</option>
+              <option value="अधूनमधून">अधूनमधून (Intermittent)</option>
+            </select>
+            <div *ngIf="inspectionForm.get('electricitySupply')?.invalid && (inspectionForm.get('electricitySupply')?.dirty || inspectionForm.get('electricitySupply')?.touched)" class="text-danger small">
+              निवड आवश्यक आहे.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">वजन घेतलेल्या मुलांची संख्या:</label>
+            <input type="number" class="form-control" formControlName="childrenWeightMeasured" min="0">
+            <div *ngIf="inspectionForm.get('childrenWeightMeasured')?.invalid && (inspectionForm.get('childrenWeightMeasured')?.dirty || inspectionForm.get('childrenWeightMeasured')?.touched)" class="text-danger small">
+              संख्या आवश्यक आहे (किमान 0).
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">सामान्य वजनाची मुले:</label>
+            <input type="number" class="form-control" formControlName="normalWeightChildren" min="0">
+            <div *ngIf="inspectionForm.get('normalWeightChildren')?.invalid && (inspectionForm.get('normalWeightChildren')?.dirty || inspectionForm.get('normalWeightChildren')?.touched)" class="text-danger small">
+               संख्या आवश्यक आहे (किमान 0).
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <label class="form-label">शेरा (Officer's Remarks):</label>
+            <textarea rows="3" class="form-control" formControlName="shera" placeholder="शेरा लिहा"></textarea>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">नोंदणीकृत बालक संख्या (पटावरील - Total Enrollment):</label>
+            <input type="number" class="form-control" formControlName="registeredChildren" min="0">
+            <div *ngIf="inspectionForm.get('registeredChildren')?.invalid && (inspectionForm.get('registeredChildren')?.dirty || inspectionForm.get('registeredChildren')?.touched)" class="text-danger small">
+              संख्या आवश्यक आहे (किमान 0).
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">वर्तमान वेळेस उपस्थित बालक संख्या (Children Present):</label>
+            <input type="number" class="form-control" formControlName="attendingChildren" min="0">
+            <div *ngIf="inspectionForm.get('attendingChildren')?.invalid && (inspectionForm.get('attendingChildren')?.dirty || inspectionForm.get('attendingChildren')?.touched)" class="text-danger small">
+              संख्या आवश्यक आहे (किमान 0).
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">तीव्र कमी वजनाची (SUW):</label>
+            <input type="number" class="form-control" formControlName="severelyUnderweight" min="0">
+            <div *ngIf="inspectionForm.get('severelyUnderweight')?.invalid && (inspectionForm.get('severelyUnderweight')?.dirty || inspectionForm.get('severelyUnderweight')?.touched)" class="text-danger small">
+               संख्या आवश्यक आहे (किमान 0).
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">मध्यम कमी वजनाची (MUW):</label>
+            <input type="number" class="form-control" formControlName="moderatelyUnderweight" min="0">
+            <div *ngIf="inspectionForm.get('moderatelyUnderweight')?.invalid && (inspectionForm.get('moderatelyUnderweight')?.dirty || inspectionForm.get('moderatelyUnderweight')?.touched)" class="text-danger small">
+               संख्या आवश्यक आहे (किमान 0).
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">तीव्र तीव्र कुपोषित (SAM):</label>
+            <input type="number" class="form-control" formControlName="severelyMalnourished" min="0">
+            <div *ngIf="inspectionForm.get('severelyMalnourished')?.invalid && (inspectionForm.get('severelyMalnourished')?.dirty || inspectionForm.get('severelyMalnourished')?.touched)" class="text-danger small">
+               संख्या आवश्यक आहे (किमान 0).
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">मध्यम तीव्र कुपोषित (MAM):</label>
+            <input type="number" class="form-control" formControlName="moderatelyMalnourished" min="0">
+            <div *ngIf="inspectionForm.get('moderatelyMalnourished')?.invalid && (inspectionForm.get('moderatelyMalnourished')?.dirty || inspectionForm.get('moderatelyMalnourished')?.touched)" class="text-danger small">
+               संख्या आवश्यक आहे (किमान 0).
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">भेटीच्या दिवशी आहार (Breakfast/Meal):</label>
+            <input class="form-control" formControlName="foodProvided" placeholder="आहार लिहा">
+             <div *ngIf="inspectionForm.get('foodProvided')?.invalid && (inspectionForm.get('foodProvided')?.dirty || inspectionForm.get('foodProvided')?.touched)" class="text-danger small">
+              आहार आवश्यक आहे.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">आहाराचा दर्जा (Taste/Quality):</label>
+            <select class="form-select" formControlName="foodGrade">
+                <option value="" disabled selected>निवडा</option>
+                <option value="उत्तम">उत्तम (Good)</option>
+                <option value="मध्यम">मध्यम (Average)</option>
+                <option value="खराब">खराब (Poor)</option>
+            </select>
+             <div *ngIf="inspectionForm.get('foodGrade')?.invalid && (inspectionForm.get('foodGrade')?.dirty || inspectionForm.get('foodGrade')?.touched)" class="text-danger small">
+              दर्जा आवश्यक आहे.
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <label class="form-label">राबवलेले अभियान व दिलेल्या सूचना (Campaigns & Instructions):</label>
+            <textarea rows="3" class="form-control" formControlName="campaigns" placeholder="राबवलेले अभियान व दिलेल्या सूचना लिहा"></textarea>
+          </div>
+          <div class="col-md-12">
+            <label class="form-label">अंगणवाडी अभिप्राय/इतर सूचना (Feedback/Suggestions):</label>
+            <textarea rows="3" class="form-control" formControlName="suggestions" placeholder="इतर सूचना लिहा"></textarea>
+          </div>
+
+          <div class="col-md-12">
+            <label class="form-label">फोटो अपलोड करा (जास्तीत जास्त 4):</label>
+            <div class="row">
+              <div class="col-6 col-sm-4 col-md-3 mb-3" *ngFor="let photo of [0,1,2,3]; let i = index">
+                <input type="file" class="form-control form-control-sm mb-1" accept="image/*" (change)="onFileChange($event, i)" #fileInput>
+                <button type="button" class="btn btn-outline-secondary btn-sm w-100 mb-1" (click)="openCameraModal(i)">
+                  कॅमेराने फोटो काढा
+                </button>
+                <div class="mt-1 text-center photo-preview-container" style="min-height: 100px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center;">
+                  <img *ngIf="photoPreviews[i]" [src]="photoPreviews[i]" class="img-thumbnail photo-preview-image" style="max-height: 100px; max-width: 100%;">
+                  <span *ngIf="!photoPreviews[i]" class="text-muted small">फोटो नाही</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-4">
+          <button class="btn btn-success px-4 py-2" type="submit" [disabled]="inspectionForm.invalid">
+            सबमिट करा
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Camera Modal -->
+<div *ngIf="isCameraOpen" class="camera-modal-overlay">
+  <div class="camera-modal-content card">
+    <div class="card-header text-center">
+      कॅमेरा
+    </div>
+    <div class="card-body text-center">
+      <video #videoPlayer autoplay playsinline class="camera-video-element" style="width: 100%; max-width: 400px; border: 1px solid #ddd;"></video>
+      <canvas #canvasElement style="display:none;"></canvas>
+      <div *ngIf="cameraError" class="alert alert-danger mt-2">{{ cameraError }}</div>
+    </div>
+    <div class="card-footer text-center">
+      <button (click)="snapPhoto()" class="btn btn-primary me-2"
+              [disabled]="!videoPlayer || !videoPlayer.srcObject || videoPlayer.paused || videoPlayer.ended">फोटो काढा</button>
+      <button (click)="closeCameraModal()" class="btn btn-secondary">बंद करा</button>
+    </div>
+  </div>
+</div>

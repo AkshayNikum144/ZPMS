@@ -1,0 +1,181 @@
+<div class="container-fluid">
+    <h1>{{ marathiLabels.formTitle }}</h1>
+    <p>{{ marathiLabels.formSubtitle }}</p>
+
+    <form [formGroup]="arogyaForm" (ngSubmit)="onSubmit()" novalidate>
+
+        <!-- Section 1: Basic Info -->
+        <fieldset>
+            <legend>{{ marathiLabels.section1Title }}</legend>
+            <div class="form-row grid-3">
+                <div class="form-group"><label for="arogya_kendra_name">{{ marathiLabels.arogya_kendra_name }}:</label><input type="text" id="arogya_kendra_name" formControlName="arogya_kendra_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['arogya_kendra_name'].errors }"></div>
+                <div class="form-group"><label for="upkendra">{{ marathiLabels.upkendra }}:</label><input type="text" id="upkendra" formControlName="upkendra" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['upkendra'].errors }"></div>
+                <div class="form-group"><label for="taluka">{{ marathiLabels.taluka }}:</label><input type="text" id="taluka" formControlName="taluka" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['taluka'].errors }"></div>
+                <div class="form-group"><label for="inspection_officer">{{ marathiLabels.inspection_officer }}:</label><input type="text" id="inspection_officer" formControlName="inspection_officer" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['inspection_officer'].errors }"></div>
+                <div class="form-group"><label for="officer_role">{{ marathiLabels.officer_role }}:</label><input type="text" id="officer_role" formControlName="officer_role" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['officer_role'].errors }"></div>
+                <div class="form-group"><label for="inspection_date">{{ marathiLabels.inspection_date }}:</label><input type="date" id="inspection_date" formControlName="inspection_date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['inspection_date'].errors }"></div>
+            </div>
+        </fieldset>
+
+        <!-- Section 2: Center Details & RKS -->
+        <fieldset>
+            <legend>{{ marathiLabels.section2Title }}</legend>
+            <div class="form-row grid-3">
+                <div class="form-group"><label for="upkendra_sankhya">{{ marathiLabels.upkendra_sankhya }}:</label><input type="number" id="upkendra_sankhya" formControlName="upkendra_sankhya" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['upkendra_sankhya'].errors }"></div>
+                <div class="form-group"><label for="gavanchi_sankhya">{{ marathiLabels.gavanchi_sankhya }}:</label><input type="number" id="gavanchi_sankhya" formControlName="gavanchi_sankhya" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['gavanchi_sankhya'].errors }"></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.HealthCenterAvailability247 }}</label><div><label><input type="radio" formControlName="HealthCenterAvailability247" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="HealthCenterAvailability247" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.HealthCenterAvailabilityIPHS }}</label><div><label><input type="radio" formControlName="HealthCenterAvailabilityIPHS" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="HealthCenterAvailabilityIPHS" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.RKS_Sthapan }}</label><div><label><input type="radio" formControlName="RKS_Sthapan" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="RKS_Sthapan" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.RKS_Nondani }}</label><div><label><input type="radio" formControlName="RKS_Nondani" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="RKS_Nondani" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.RKS_Sabha_Niyamit }}</label><div><label><input type="radio" formControlName="RKS_Sabha_Niyamit" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="RKS_Sabha_Niyamit" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group"><label for="RKS_Ekun_Sabha">{{ marathiLabels.RKS_Ekun_Sabha }}:</label><input type="number" id="RKS_Ekun_Sabha" formControlName="RKS_Ekun_Sabha" class="form-control"></div>
+                <div class="form-group"><label for="Executive_Meetings">{{ marathiLabels.Executive_Meetings }}:</label><input type="number" id="Executive_Meetings" formControlName="Executive_Meetings" class="form-control"></div>
+                <div class="form-group"><label for="Government_Meetings">{{ marathiLabels.Government_Meetings }}:</label><input type="number" id="Government_Meetings" formControlName="Government_Meetings" class="form-control"></div>
+            </div>
+        </fieldset>
+        
+        <!-- Section 3: Infrastructure & Cleanliness -->
+        <fieldset>
+            <legend>{{ marathiLabels.section3Title }}</legend>
+            <div class="form-row grid-3">
+                <div class="form-group radio-group"><label>{{ marathiLabels.bahya_parisara_swachata }}:</label><div><label><input type="radio" formControlName="bahya_parisara_swachata" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="bahya_parisara_swachata" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.vruksharopan }}</label><div><label><input type="radio" formControlName="vruksharopan" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="vruksharopan" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.biomedical_waste_vyavastha }}:</label><div><label><input type="radio" formControlName="biomedical_waste_vyavastha" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="biomedical_waste_vyavastha" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.pani_purvatha }}:</label><div><label><input type="radio" formControlName="pani_purvatha" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="pani_purvatha" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.vidyut_purvatha }}:</label><div><label><input type="radio" formControlName="vidyut_purvatha" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="vidyut_purvatha" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.sanrakshak_bhint }}:</label><div><label><input type="radio" formControlName="sanrakshak_bhint" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="sanrakshak_bhint" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.delivery_room_swachata }}:</label><div><label><input type="radio" formControlName="delivery_room_swachata" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="delivery_room_swachata" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+            </div>
+        </fieldset>
+
+        <!-- Section 4: Medical Services & Equipment -->
+        <fieldset>
+            <legend>{{ marathiLabels.section4Title }}</legend>
+            <div class="form-row grid-3">
+                <div class="form-group radio-group"><label>{{ marathiLabels.vahan_chalu }}</label><div><label><input type="radio" formControlName="vahan_chalu" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="vahan_chalu" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.aushadhancha_satha }}:</label><div><label><input type="radio" formControlName="aushadhancha_satha" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="aushadhancha_satha" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.vaidyakiya_adhikari_opd }}:</label><div><label><input type="radio" formControlName="vaidyakiya_adhikari_opd" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="vaidyakiya_adhikari_opd" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.lasikaran_divas }}:</label><div><label><input type="radio" formControlName="lasikaran_divas" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="lasikaran_divas" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.mahiti_adhikar_board }}:</label><div><label><input type="radio" formControlName="mahiti_adhikar_board" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="mahiti_adhikar_board" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.lokseva_hakk_board }}:</label><div><label><input type="radio" formControlName="lokseva_hakk_board" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="lokseva_hakk_board" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.vai_opd_diwas }}:</label><div><label><input type="radio" formControlName="vai_opd_diwas" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="vai_opd_diwas" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.saha_rashtriya_aarogya }}:</label><div><label><input type="radio" formControlName="saha_rashtriya_aarogya" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="saha_rashtriya_aarogya" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.rugnansathi_waiting }}:</label><div><label><input type="radio" formControlName="rugnansathi_waiting" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="rugnansathi_waiting" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.delivery_kit }}:</label><div><label><input type="radio" formControlName="delivery_kit" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="delivery_kit" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.baby_weight_machine }}:</label><div><label><input type="radio" formControlName="baby_weight_machine" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="baby_weight_machine" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.cot_bed }}:</label><div><label><input type="radio" formControlName="cot_bed" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="cot_bed" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.prasuti_kakshat_protocol }}:</label><div><label><input type="radio" formControlName="prasuti_kakshat_protocol" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="prasuti_kakshat_protocol" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.emergency_tray }}:</label><div><label><input type="radio" formControlName="emergency_tray" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="emergency_tray" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.adi_sirinj }}:</label><div><label><input type="radio" formControlName="adi_sirinj" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="adi_sirinj" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.rugnana_kespaper }}</label><div><label><input type="radio" formControlName="rugnana_kespaper" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="rugnana_kespaper" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.baherun_aushadhi }}</label><div><label><input type="radio" formControlName="baherun_aushadhi" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="baherun_aushadhi" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group"><label for="daily_expenditure">{{ marathiLabels.daily_expenditure }}:</label><input type="number" id="daily_expenditure" formControlName="daily_expenditure" class="form-control"></div>
+                <div class="form-group"><label for="kespaper_opd_fee">{{ marathiLabels.kespaper_opd_fee }}:</label><input type="number" id="kespaper_opd_fee" formControlName="kespaper_opd_fee" class="form-control"></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.weight_machine_bp }}:</label><div><label><input type="radio" formControlName="weight_machine_bp" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="weight_machine_bp" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.karmachari_ganveshat }}</label><div><label><input type="radio" formControlName="karmachari_ganveshat" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="karmachari_ganveshat" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.iec_material }}:</label><div><label><input type="radio" formControlName="iec_material" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="iec_material" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.arv_asv_satha }}:</label><div><label><input type="radio" formControlName="arv_asv_satha" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="arv_asv_satha" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.ort_corner }}:</label><div><label><input type="radio" formControlName="ort_corner" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="ort_corner" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.pani_namune_tapasani }}:</label><div><label><input type="radio" formControlName="pani_namune_tapasani" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="pani_namune_tapasani" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+            </div>
+        </fieldset>
+
+        <!-- Section 5: Statistics -->
+        <fieldset>
+            <legend>{{ marathiLabels.section5Title }}</legend>
+            <div class="form-row grid-3">
+                <div class="form-group"><label for="opd_sankhya">{{ marathiLabels.opd_sankhya }}:</label><input type="number" id="opd_sankhya" formControlName="opd_sankhya" class="form-control"></div>
+                <div class="form-group"><label for="ipd_sankhya">{{ marathiLabels.ipd_sankhya }}:</label><input type="number" id="ipd_sankhya" formControlName="ipd_sankhya" class="form-control"></div>
+                <div class="form-group"><label for="delivery_sankhya">{{ marathiLabels.delivery_sankhya }}:</label><input type="number" id="delivery_sankhya" formControlName="delivery_sankhya" class="form-control"></div>
+                <div class="form-group"><label for="kutumb_kalyan_shasrkriya">{{ marathiLabels.kutumb_kalyan_shasrkriya }}:</label><input type="number" id="kutumb_kalyan_shasrkriya" formControlName="kutumb_kalyan_shasrkriya" class="form-control"></div>
+                <div class="form-group"><label for="referral_sankhya">{{ marathiLabels.referral_sankhya }}:</label><input type="number" id="referral_sankhya" formControlName="referral_sankhya" class="form-control"></div>
+            </div>
+        </fieldset>
+
+        <!-- Section 6: Feedback & Observations -->
+        <fieldset>
+            <legend>{{ marathiLabels.section6Title }}</legend>
+             <div class="form-row grid-2">
+                 <div class="form-group radio-group"><label>{{ marathiLabels.takraar_pustika }}:</label><div><label><input type="radio" formControlName="takraar_pustika" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="takraar_pustika" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                 <div class="form-group radio-group"><label>{{ marathiLabels.rugnanchya_natewaikansathi_suvidha }}:</label><div><label><input type="radio" formControlName="rugnanchya_natewaikansathi_suvidha" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="rugnanchya_natewaikansathi_suvidha" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                 <div class="form-group radio-group"><label>{{ marathiLabels._24_taas_atyavashyak_seva }}:</label><div><label><input type="radio" formControlName="_24_taas_atyavashyak_seva" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="_24_taas_atyavashyak_seva" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+             </div>
+             <div class="form-row grid-1">
+                 <div class="form-group full-width"><label for="parisarat_sathichya_aajarancha_pradurbhav">{{ marathiLabels.parisarat_sathichya_aajarancha_pradurbhav }}:</label><textarea id="parisarat_sathichya_aajarancha_pradurbhav" formControlName="parisarat_sathichya_aajarancha_pradurbhav" rows="3" class="form-control"></textarea></div>
+                 <div class="form-group full-width"><label for="mata_mrutyu_sandarbh">{{ marathiLabels.mata_mrutyu_sandarbh }}:</label><textarea id="mata_mrutyu_sandarbh" formControlName="mata_mrutyu_sandarbh" rows="3" class="form-control"></textarea></div>
+                 <div class="form-group full-width"><label for="paa_kendra_adiadchani">{{ marathiLabels.paa_kendra_adiadchani }}:</label><textarea id="paa_kendra_adiadchani" formControlName="paa_kendra_adiadchani" rows="3" class="form-control"></textarea></div>
+                 <div class="form-group full-width"><label for="paa_kendramadhye_nikami_vastu">{{ marathiLabels.paa_kendramadhye_nikami_vastu }}:</label><textarea id="paa_kendramadhye_nikami_vastu" formControlName="paa_kendramadhye_nikami_vastu" rows="3" class="form-control"></textarea></div>
+                 <div class="form-group full-width"><label for="vaia_karmachari_atyavashyak_seva">{{ marathiLabels.vaia_karmachari_atyavashyak_seva }}:</label><textarea id="vaia_karmachari_atyavashyak_seva" formControlName="vaia_karmachari_atyavashyak_seva" rows="3" class="form-control"></textarea></div>
+                 <div class="form-group full-width"><label for="prashikshan_aavashyak_karmcharyache_naav">{{ marathiLabels.prashikshan_aavashyak_karmcharyache_naav }}:</label><textarea id="prashikshan_aavashyak_karmcharyache_naav" formControlName="prashikshan_aavashyak_karmcharyache_naav" rows="3" class="form-control"></textarea></div>
+             </div>
+        </fieldset>
+        
+        <!-- Section 7: Other Facilities -->
+        <fieldset>
+            <legend>{{ marathiLabels.section7Title }}</legend>
+            <div class="form-row grid-3">
+                <div class="form-group radio-group"><label>{{ marathiLabels.drinking_water }}:</label><div><label><input type="radio" formControlName="drinking_water" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="drinking_water" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.telephone }}:</label><div><label><input type="radio" formControlName="telephone" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="telephone" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.generator_inverter }}:</label><div><label><input type="radio" formControlName="generator_inverter" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="generator_inverter" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.vehicle }}:</label><div><label><input type="radio" formControlName="vehicle" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="vehicle" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.computer_internet }}:</label><div><label><input type="radio" formControlName="computer_internet" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="computer_internet" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+                <div class="form-group radio-group"><label>{{ marathiLabels.solar_water_heater }}:</label><div><label><input type="radio" formControlName="solar_water_heater" [value]="true"> {{ marathiLabels.yes }}</label><label><input type="radio" formControlName="solar_water_heater" [value]="false"> {{ marathiLabels.no }}</label></div></div>
+            </div>
+        </fieldset>
+        
+        <!-- Section 8: Photo Upload -->
+        <fieldset>
+            <legend>{{ marathiLabels.section8Title }}</legend>
+            <p>{{ marathiLabels.section8Subtitle }}</p>
+            <div class="photo-upload-grid">
+                <div class="photo-upload-container">
+                    <label>{{ marathiLabels.image1 }}</label>
+                    <div class="preview-box"><img *ngIf="previewUrls['image_file_1']" [src]="previewUrls['image_file_1']" alt="Preview"><span *ngIf="!previewUrls['image_file_1']" class="placeholder">{{ marathiLabels.noImage }}</span></div>
+                    <div class="button-group-small"><button type="button" class="btn-secondary" (click)="fileInput1.click()">{{ marathiLabels.chooseFile }}</button><button type="button" class="btn-primary" (click)="openCamera('image_file_1')">{{ marathiLabels.openCamera }}</button></div>
+                    <input type="file" #fileInput1 hidden (change)="onFileChange($event, 'image_file_1')" accept="image/*">
+                </div>
+                <div class="photo-upload-container">
+                    <label>{{ marathiLabels.image2 }}</label>
+                    <div class="preview-box"><img *ngIf="previewUrls['image_file_2']" [src]="previewUrls['image_file_2']" alt="Preview"><span *ngIf="!previewUrls['image_file_2']" class="placeholder">{{ marathiLabels.noImage }}</span></div>
+                    <div class="button-group-small"><button type="button" class="btn-secondary" (click)="fileInput2.click()">{{ marathiLabels.chooseFile }}</button><button type="button" class="btn-primary" (click)="openCamera('image_file_2')">{{ marathiLabels.openCamera }}</button></div>
+                    <input type="file" #fileInput2 hidden (change)="onFileChange($event, 'image_file_2')" accept="image/*">
+                </div>
+                <div class="photo-upload-container">
+                    <label>{{ marathiLabels.image3 }}</label>
+                     <div class="preview-box"><img *ngIf="previewUrls['image_file_3']" [src]="previewUrls['image_file_3']" alt="Preview"><span *ngIf="!previewUrls['image_file_3']" class="placeholder">{{ marathiLabels.noImage }}</span></div>
+                    <div class="button-group-small"><button type="button" class="btn-secondary" (click)="fileInput3.click()">{{ marathiLabels.chooseFile }}</button><button type="button" class="btn-primary" (click)="openCamera('image_file_3')">{{ marathiLabels.openCamera }}</button></div>
+                    <input type="file" #fileInput3 hidden (change)="onFileChange($event, 'image_file_3')" accept="image/*">
+                </div>
+                <div class="photo-upload-container">
+                    <label>{{ marathiLabels.image4 }}</label>
+                     <div class="preview-box"><img *ngIf="previewUrls['image_file_4']" [src]="previewUrls['image_file_4']" alt="Preview"><span *ngIf="!previewUrls['image_file_4']" class="placeholder">{{ marathiLabels.noImage }}</span></div>
+                    <div class="button-group-small"><button type="button" class="btn-secondary" (click)="fileInput4.click()">{{ marathiLabels.chooseFile }}</button><button type="button" class="btn-primary" (click)="openCamera('image_file_4')">{{ marathiLabels.openCamera }}</button></div>
+                    <input type="file" #fileInput4 hidden (change)="onFileChange($event, 'image_file_4')" accept="image/*">
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- Main Action Buttons -->
+        <div class="main-button-group">
+            <button type="submit" [disabled]="submitted && arogyaForm.invalid">{{ marathiLabels.submitButton }}</button>
+            <button type="button" (click)="onReset()">{{ marathiLabels.resetButton }}</button>
+        </div>
+    </form>
+</div>
+
+<!-- Camera Modal -->
+<div class="camera-modal-overlay" *ngIf="isCameraOpen">
+    <div class="camera-modal-content">
+        <video #videoElement autoplay playsinline></video>
+        <canvas #canvasElement hidden></canvas>
+        <div class="camera-controls">
+            <button type="button" class="btn-capture" (click)="captureImage()">{{ marathiLabels.captureButton }}</button>
+            <button type="button" class="btn-cancel" (click)="closeCamera()">{{ marathiLabels.cancelButton }}</button>
+        </div>
+    </div>
+</div>
+<!-- <app-success-popup 
+    *ngIf="showSuccessPopup" 
+    [message]="successPopupMessage" 
+    (close)="handlePopupClose()">
+</app-success-popup> -->

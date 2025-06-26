@@ -1,0 +1,53 @@
+<div class="form-container card">
+  <div class="card-header">
+    <h3>आरोग्य केंद्र चेक लिस्ट</h3>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="checklistForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <!-- Taluka Dropdown -->
+        <div class="form-group">
+          <label for="taluka">तालुका <span class="required">*</span></label>
+          <select id="taluka" formControlName="taluka" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f['taluka'].errors }">
+            <option value="" disabled>तालुका निवडा</option>
+            <option *ngFor="let taluka of talukas$ | async" [value]="taluka">{{ taluka }}</option>
+          </select>
+          <div *ngIf="submitted && f['taluka'].errors" class="invalid-feedback">
+            <div *ngIf="f['taluka'].errors['required']">कृपया तालुका निवडा.</div>
+          </div>
+        </div>
+
+        <!-- Arogya Kendra Dropdown -->
+        <div class="form-group">
+          <label for="kendra">प्राथमिक आरोग्य केंद्र <span class="required">*</span></label>
+          <select id="kendra" formControlName="prathmik_arogya_kendra" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f['prathmik_arogya_kendra'].errors }">
+            <option value="" disabled>प्रा. आ. केंद्र निवडा</option>
+            <option *ngFor="let kendra of kendras$ | async" [value]="kendra">{{ kendra }}</option>
+          </select>
+           <div *ngIf="submitted && f['prathmik_arogya_kendra'].errors" class="invalid-feedback">
+            <div *ngIf="f['prathmik_arogya_kendra'].errors['required']">कृपया आरोग्य केंद्र निवडा.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <!-- Inspection Date -->
+        <div class="form-group">
+          <label for="date">भेटीचा दिनांक <span class="required">*</span></label>
+          <input type="date" id="date" formControlName="bheticha_dinank" class="form-control"
+                 placeholder="dd-mm-yyyy" [ngClass]="{ 'is-invalid': submitted && f['bheticha_dinank'].errors }">
+           <div *ngIf="submitted && f['bheticha_dinank'].errors" class="invalid-feedback">
+            <div *ngIf="f['bheticha_dinank'].errors['required']">कृपया दिनांक निवडा.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-submit">सबमिट</button>
+        <button type="button" (click)="onReset()" class="btn btn-reset">रिसेट</button>
+      </div>
+    </form>
+  </div>
+</div>

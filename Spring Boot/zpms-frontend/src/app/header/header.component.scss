@@ -1,0 +1,26 @@
+.custom-header {
+  background-color: #ffffff;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.header-content {
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+}
+
+.logo img {
+  height: 80px;
+  width: auto;
+}
+
+.title h1 {
+  font-size: 28px;
+  color: #3498db; /* matches your blue shade */
+  text-align: center;
+  margin: 0;
+  font-weight: 600;
+}

@@ -1,0 +1,39 @@
+/* src/app/app.component.scss */
+
+.main-layout {
+  display: flex;
+}
+
+.main-content {
+  flex-grow: 1; // Takes up the remaining space
+  padding: 20px;
+}
+
+.full-width-content {
+  width: 100%;
+  padding: 20px;
+}
+
+// --- Overlay Styles ---
+.sidebar-overlay {
+  display: none; // Hidden by default
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999; // Below the sidebar but above everything else
+}
+
+.sidebar-overlay.active {
+  display: block; // Show it when the sidebar is open on mobile
+}
+
+// On mobile, the main content area should take up the full width
+// because the sidebar is now an overlay.
+@media (max-width: 768px) {
+  .main-content {
+    width: 100%;
+  }
+}

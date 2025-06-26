@@ -1,0 +1,116 @@
+<div class="container">
+    <h1>Arogya Kendra Inspection Form</h1>
+    <p>Please fill out all the details for the inspection of the Arogya Kendra.</p>
+
+    <form [formGroup]="arogyaForm" (ngSubmit)="onSubmit()" novalidate>
+
+        <fieldset>
+            <legend>1. Basic Information</legend>
+            <div class="form-group">
+                <label for="arogya_kendra_name">Arogya Kendra Name:</label>
+                <input type="text" id="arogya_kendra_name" formControlName="arogya_kendra_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['arogya_kendra_name'].errors }">
+                <div *ngIf="submitted && f['arogya_kendra_name'].errors" class="invalid-feedback">
+                    <div *ngIf="f['arogya_kendra_name'].errors['required']">This field is required.</div>
+                </div>
+            </div>
+            <!-- All other fields follow the same pattern -->
+            <div class="form-group"><label for="upkendra">Upkendra (Sub-center):</label><input type="text" id="upkendra" formControlName="upkendra" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['upkendra'].errors }"></div>
+            <div class="form-group"><label for="taluka">Taluka:</label><input type="text" id="taluka" formControlName="taluka" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['taluka'].errors }"></div>
+            <div class="form-group"><label for="inspection_officer">Inspection Officer Name:</label><input type="text" id="inspection_officer" formControlName="inspection_officer" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['inspection_officer'].errors }"></div>
+            <div class="form-group"><label for="officer_role">Officer Role:</label><input type="text" id="officer_role" formControlName="officer_role" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['officer_role'].errors }"></div>
+            <div class="form-group"><label for="inspection_date">Inspection Date:</label><input type="date" id="inspection_date" formControlName="inspection_date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['inspection_date'].errors }"></div>
+        </fieldset>
+
+        <fieldset>
+            <legend>2. Center Details & RKS (Rog-Kalyan Samiti)</legend>
+            <div class="form-group"><label for="upkendra_sankhya">Number of Sub-centers:</label><input type="number" id="upkendra_sankhya" formControlName="upkendra_sankhya" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['upkendra_sankhya'].errors }"></div>
+            <div class="form-group"><label for="gavanchi_sankhya">Number of Villages:</label><input type="number" id="gavanchi_sankhya" formControlName="gavanchi_sankhya" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['gavanchi_sankhya'].errors }"></div>
+            <div class="form-group radio-group"><label>Health Center Available 24x7?</label><div><label><input type="radio" formControlName="HealthCenterAvailability247" [value]="true"> Yes</label><label><input type="radio" formControlName="HealthCenterAvailability247" [value]="false"> No</label></div></div>
+            <div class="form-group radio-group"><label>Health Center Available as per IPHS?</label><div><label><input type="radio" formControlName="HealthCenterAvailabilityIPHS" [value]="true"> Yes</label><label><input type="radio" formControlName="HealthCenterAvailabilityIPHS" [value]="false"> No</label></div></div>
+            <div class="form-group radio-group"><label>RKS Established?</label><div><label><input type="radio" formControlName="RKS_Sthapan" [value]="true"> Yes</label><label><input type="radio" formControlName="RKS_Sthapan" [value]="false"> No</label></div></div>
+            <div class="form-group radio-group"><label>RKS Registered?</label><div><label><input type="radio" formControlName="RKS_Nondani" [value]="true"> Yes</label><label><input type="radio" formControlName="RKS_Nondani" [value]="false"> No</label></div></div>
+            <div class="form-group radio-group"><label>RKS Meetings Regular?</label><div><label><input type="radio" formControlName="RKS_Sabha_Niyamit" [value]="true"> Yes</label><label><input type="radio" formControlName="RKS_Sabha_Niyamit" [value]="false"> No</label></div></div>
+            <div class="form-group"><label for="RKS_Ekun_Sabha">Total RKS Meetings:</label><input type="number" id="RKS_Ekun_Sabha" formControlName="RKS_Ekun_Sabha" class="form-control"></div>
+            <div class="form-group"><label for="Executive_Meetings">Executive Meetings:</label><input type="number" id="Executive_Meetings" formControlName="Executive_Meetings" class="form-control"></div>
+            <div class="form-group"><label for="Government_Meetings">Government Meetings:</label><input type="number" id="Government_Meetings" formControlName="Government_Meetings" class="form-control"></div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>3. Infrastructure & Cleanliness</legend>
+            <div class="form-group radio-group"><label>External Premise Cleanliness:</label><div><label><input type="radio" formControlName="bahya_parisara_swachata" [value]="true"> Yes</label><label><input type="radio" formControlName="bahya_parisara_swachata" [value]="false"> No</label></div></div>
+            <div class="form-group radio-group"><label>Tree Plantation Done:</label><div><label><input type="radio" formControlName="vruksharopan" [value]="true"> Yes</label><label><input type="radio" formControlName="vruksharopan" [value]="false"> No</label></div></div>
+            <div class="form-group radio-group"><label>Biomedical Waste Management:</label><div><label><input type="radio" formControlName="biomedical_waste_vyavastha" [value]="true"> Yes</label><label><input type="radio" formControlName="biomedical_waste_vyavastha" [value]="false"> No</label></div></div>
+            <div class="form-group radio-group"><label>Water Supply:</label><div><label><input type="radio" formControlName="pani_purvatha" [value]="true"> Yes</label><label><input type="radio" formControlName="pani_purvatha" [value]="false"> No</label></div></div>
+            <div class="form-group radio-group"><label>Electricity Supply:</label><div><label><input type="radio" formControlName="vidyut_purvatha" [value]="true"> Yes</label><label><input type="radio" formControlName="vidyut_purvatha" [value]="false"> No</label></div></div>
+            <div class="form-group radio-group"><label>Protective Wall:</label><div><label><input type="radio" formControlName="sanrakshak_bhint" [value]="true"> Yes</label><label><input type="radio" formControlName="sanrakshak_bhint" [value]="false"> No</label></div></div>
+            <div class="form-group radio-group"><label>Delivery Room Cleanliness:</label><div><label><input type="radio" formControlName="delivery_room_swachata" [value]="true"> Yes</label><label><input type="radio" formControlName="delivery_room_swachata" [value]="false"> No</label></div></div>
+        </fieldset>
+
+        <!-- Repeat the structure for all other fieldsets -->
+
+        <fieldset>
+            <legend>4. Medical Services & Equipment</legend>
+            <div class="form-group radio-group"><label>Vehicle in Working Condition:</label><div><label><input type="radio" formControlName="vahan_chalu" [value]="true"> Yes</label><label><input type="radio" formControlName="vahan_chalu" [value]="false"> No</label></div></div>
+            <div class="form-group radio-group"><label>Adequate Medicine Stock:</label><div><label><input type="radio" formControlName="aushadhancha_satha" [value]="true"> Yes</label><label><input type="radio" formControlName="aushadhancha_satha" [value]="false"> No</label></div></div>
+            <!-- Add all other radio and text fields for this section here -->
+        </fieldset>
+
+        <fieldset>
+            <legend>5. Statistics (Monthly Average)</legend>
+            <div class="form-group"><label for="opd_sankhya">OPD Count:</label><input type="number" id="opd_sankhya" formControlName="opd_sankhya" class="form-control"></div>
+            <div class="form-group"><label for="ipd_sankhya">IPD Count:</label><input type="number" id="ipd_sankhya" formControlName="ipd_sankhya" class="form-control"></div>
+            <div class="form-group"><label for="delivery_sankhya">Delivery Count:</label><input type="number" id="delivery_sankhya" formControlName="delivery_sankhya" class="form-control"></div>
+            <div class="form-group"><label for="kutumb_kalyan_shasrkriya">Family Planning Operations:</label><input type="number" id="kutumb_kalyan_shasrkriya" formControlName="kutumb_kalyan_shasrkriya" class="form-control"></div>
+            <div class="form-group"><label for="referral_sankhya">Referral Count:</label><input type="number" id="referral_sankhya" formControlName="referral_sankhya" class="form-control"></div>
+        </fieldset>
+
+        <fieldset>
+            <legend>6. Feedback, Issues & Remarks</legend>
+             <div class="form-group radio-group"><label>Complaint Book Available:</label><div><label><input type="radio" formControlName="takraar_pustika" [value]="true"> Yes</label><label><input type="radio" formControlName="takraar_pustika" [value]="false"> No</label></div></div>
+             <div class="form-group radio-group"><label>Facility for Patient's Relatives:</label><div><label><input type="radio" formControlName="rugnanchya_natewaikansathi_suvidha" [value]="true"> Yes</label><label><input type="radio" formControlName="rugnanchya_natewaikansathi_suvidha" [value]="false"> No</label></div></div>
+             <div class="form-group"><label for="parisarat_sathichya_aajarancha_pradurbhav">Outbreak of Epidemic Diseases:</label><textarea id="parisarat_sathichya_aajarancha_pradurbhav" formControlName="parisarat_sathichya_aajarancha_pradurbhav" rows="3"></textarea></div>
+             <div class="form-group"><label for="mata_mrutyu_sandarbh">Details on Maternal Deaths:</label><textarea id="mata_mrutyu_sandarbh" formControlName="mata_mrutyu_sandarbh" rows="3"></textarea></div>
+             <div class="form-group radio-group"><label>24 Hours Essential Services:</label><div><label><input type="radio" formControlName="_24_taas_atyavashyak_seva" [value]="true"> Yes</label><label><input type="radio" formControlName="_24_taas_atyavashyak_seva" [value]="false"> No</label></div></div>
+             <div class="form-group"><label for="paa_kendra_adiadchani">Difficulties at Health Center:</label><textarea id="paa_kendra_adiadchani" formControlName="paa_kendra_adiadchani" rows="3"></textarea></div>
+             <div class="form-group"><label for="paa_kendramadhye_nikami_vastu">Non-functional Items:</label><textarea id="paa_kendramadhye_nikami_vastu" formControlName="paa_kendramadhye_nikami_vastu" rows="3"></textarea></div>
+             <div class="form-group"><label for="vaia_karmachari_atyavashyak_seva">Essential Services by Staff:</label><textarea id="vaia_karmachari_atyavashyak_seva" formControlName="vaia_karmachari_atyavashyak_seva" rows="3"></textarea></div>
+             <div class="form-group"><label for="prashikshan_aavashyak_karmcharyache_naav">Employees Needing Training:</label><textarea id="prashikshan_aavashyak_karmcharyache_naav" formControlName="prashikshan_aavashyak_karmcharyache_naav" rows="3"></textarea></div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>7. Other Available Facilities</legend>
+            <div class="form-group radio-group"><label>Drinking Water:</label><div><label><input type="radio" formControlName="drinking_water" [value]="true"> Yes</label><label><input type="radio" formControlName="drinking_water" [value]="false"> No</label></div></div>
+            <div class="form-group radio-group"><label>Telephone:</label><div><label><input type="radio" formControlName="telephone" [value]="true"> Yes</label><label><input type="radio" formControlName="telephone" [value]="false"> No</label></div></div>
+            <div class="form-group radio-group"><label>Generator/Inverter:</label><div><label><input type="radio" formControlName="generator_inverter" [value]="true"> Yes</label><label><input type="radio" formControlName="generator_inverter" [value]="false"> No</label></div></div>
+            <div class="form-group radio-group"><label>Vehicle:</label><div><label><input type="radio" formControlName="vehicle" [value]="true"> Yes</label><label><input type="radio" formControlName="vehicle" [value]="false"> No</label></div></div>
+            <div class="form-group radio-group"><label>Computer & Internet:</label><div><label><input type="radio" formControlName="computer_internet" [value]="true"> Yes</label><label><input type="radio" formControlName="computer_internet" [value]="false"> No</label></div></div>
+            <div class="form-group radio-group"><label>Solar Water Heater:</label><div><label><input type="radio" formControlName="solar_water_heater" [value]="true"> Yes</label><label><input type="radio" formControlName="solar_water_heater" [value]="false"> No</label></div></div>
+        </fieldset>
+
+        <fieldset>
+            <legend>8. Photo Uploads</legend>
+            <p>Upload relevant photos of the facility.</p>
+            <div class="form-group">
+                <label for="image_file_1">Image 1:</label>
+                <input type="file" id="image_file_1" (change)="onFileChange($event, 'image_file_1')" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label for="image_file_2">Image 2:</label>
+                <input type="file" id="image_file_2" (change)="onFileChange($event, 'image_file_2')" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label for="image_file_3">Image 3:</label>
+                <input type="file" id="image_file_3" (change)="onFileChange($event, 'image_file_3')" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label for="image_file_4">Image 4:</label>
+                <input type="file" id="image_file_4" (change)="onFileChange($event, 'image_file_4')" accept="image/*">
+            </div>
+        </fieldset>
+
+        <div class="button-group">
+            <button type="submit" [disabled]="!arogyaForm.valid && submitted">Submit Inspection Form</button>
+            <button type="button" (click)="onReset()">Reset Form</button>
+        </div>
+    </form>
+</div>

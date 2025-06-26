@@ -1,0 +1,93 @@
+<div *ngIf="formData; else loading">
+  <h2>आरोग्य केंद्र अहवाल</h2>
+  <table>
+    <tr><td><strong>आरोग्य केंद्राचे नाव:</strong></td><td>{{ formData.arogya_kendra_name }}</td></tr>
+    <tr><td><strong>उपकेंद्र:</strong></td><td>{{ formData.upkendra }}</td></tr>
+    <tr><td><strong>निरीक्षण अधिकारी:</strong></td><td>{{ formData.inspection_officer }}</td></tr>
+    <tr><td><strong>अधिकाऱ्यांची भूमिका:</strong></td><td>{{ formData.officer_role }}</td></tr>
+    <tr><td><strong>तालुका:</strong></td><td>{{ formData.taluka }}</td></tr>
+    <tr><td><strong>निरीक्षण दिनांक:</strong></td><td>{{ formData.inspection_date }}</td></tr>
+    <tr><td><strong>उपकेंद्र संख्या:</strong></td><td>{{ formData.upkendra_sankhya }}</td></tr>
+    <tr><td><strong>गावांची संख्या:</strong></td><td>{{ formData.gavanchi_sankhya }}</td></tr>
+
+    <tr><td><strong>२४x७ सुविधा:</strong></td><td>{{ formData.HealthCenterAvailability247 }}</td></tr>
+    <tr><td><strong>IPHS उपलब्धता:</strong></td><td>{{ formData.HealthCenterAvailabilityIPHS }}</td></tr>
+    <tr><td><strong>RKS स्थापना:</strong></td><td>{{ formData.RKS_Sthapan }}</td></tr>
+    <tr><td><strong>RKS नोंदणी:</strong></td><td>{{ formData.RKS_Nondani }}</td></tr>
+    <tr><td><strong>RKS सभा नियमित:</strong></td><td>{{ formData.RKS_Sabha_Niyamit }}</td></tr>
+    <tr><td><strong>RKS एकूण सभा:</strong></td><td>{{ formData.RKS_Ekun_Sabha }}</td></tr>
+
+    <tr><td><strong>कार्यकारी सभा:</strong></td><td>{{ formData.Executive_Meetings }}</td></tr>
+    <tr><td><strong>सरकारी सभा:</strong></td><td>{{ formData.Government_Meetings }}</td></tr>
+
+    <tr><td><strong>बाह्य परिसर स्वच्छता:</strong></td><td>{{ formData.bahya_parisara_swachata }}</td></tr>
+    <tr><td><strong>वृक्षारोपण:</strong></td><td>{{ formData.vruksharopan }}</td></tr>
+    <tr><td><strong>बायोमेडिकल कचरा व्यवस्था:</strong></td><td>{{ formData.biomedical_waste_vyavastha }}</td></tr>
+    <tr><td><strong>पाणी पुरवठा:</strong></td><td>{{ formData.pani_purvatha }}</td></tr>
+    <tr><td><strong>विद्युत पुरवठा:</strong></td><td>{{ formData.vidyut_purvatha }}</td></tr>
+    <tr><td><strong>वाहन कार्यरत:</strong></td><td>{{ formData.vahan_chalu }}</td></tr>
+
+    <tr><td><strong>औषध साठा:</strong></td><td>{{ formData.aushadhancha_satha }}</td></tr>
+    <tr><td><strong>वैद्यकीय अधिकारी (OPD):</strong></td><td>{{ formData.vaidyakiya_adhikari_opd }}</td></tr>
+    <tr><td><strong>लसीकरण दिवस:</strong></td><td>{{ formData.lasikaran_divas }}</td></tr>
+    <tr><td><strong>माहिती फलक:</strong></td><td>{{ formData.mahiti_adhikar_board }}</td></tr>
+    <tr><td><strong>संरक्षक भिंत:</strong></td><td>{{ formData.sanrakshak_bhint }}</td></tr>
+    <tr><td><strong>लोकसेवा फलक:</strong></td><td>{{ formData.lokseva_hakk_board }}</td></tr>
+    <tr><td><strong>VAIA OPD दिवस:</strong></td><td>{{ formData.vai_opd_diwas }}</td></tr>
+    <tr><td><strong>राष्ट्रीय आरोग्य सेवा:</strong></td><td>{{ formData.saha_rashtriya_aarogya }}</td></tr>
+    <tr><td><strong>रुग्ण प्रतीक्षा कक्ष:</strong></td><td>{{ formData.rugnansathi_waiting }}</td></tr>
+    <tr><td><strong>डिलिव्हरी किट:</strong></td><td>{{ formData.delivery_kit }}</td></tr>
+    <tr><td><strong>बाळाचे वजन यंत्र:</strong></td><td>{{ formData.baby_weight_machine }}</td></tr>
+    <tr><td><strong>पलंग:</strong></td><td>{{ formData.cot_bed }}</td></tr>
+    <tr><td><strong>प्रसूती प्रोटोकॉल:</strong></td><td>{{ formData.prasuti_kakshat_protocol }}</td></tr>
+    <tr><td><strong>एमर्जन्सी ट्रे:</strong></td><td>{{ formData.emergency_tray }}</td></tr>
+    <tr><td><strong>ADI सिरिंज:</strong></td><td>{{ formData.adi_sirinj }}</td></tr>
+    <tr><td><strong>केसपेपर:</strong></td><td>{{ formData.rugnana_kespaper }}</td></tr>
+    <tr><td><strong>बाहेरून औषधे:</strong></td><td>{{ formData.baherun_aushadhi }}</td></tr>
+    <tr><td><strong>दैनंदिन खर्च:</strong></td><td>{{ formData.daily_expenditure }}</td></tr>
+    <tr><td><strong>OPD फी:</strong></td><td>{{ formData.kespaper_opd_fee }}</td></tr>
+
+    <tr><td><strong>वजन/बीपी यंत्र:</strong></td><td>{{ formData.weight_machine_bp }}</td></tr>
+    <tr><td><strong>डिलिव्हरी कक्ष स्वच्छता:</strong></td><td>{{ formData.delivery_room_swachata }}</td></tr>
+    <tr><td><strong>कर्मचारी गणवेश:</strong></td><td>{{ formData.karmachari_ganveshat }}</td></tr>
+    <tr><td><strong>IEC साहित्य:</strong></td><td>{{ formData.iec_material }}</td></tr>
+    <tr><td><strong>ARV/ASV साठा:</strong></td><td>{{ formData.arv_asv_satha }}</td></tr>
+    <tr><td><strong>ORT कोपरा:</strong></td><td>{{ formData.ort_corner }}</td></tr>
+    <tr><td><strong>पाणी तपासणी:</strong></td><td>{{ formData.pani_namune_tapasani }}</td></tr>
+
+    <tr><td><strong>OPD संख्या:</strong></td><td>{{ formData.opd_sankhya }}</td></tr>
+    <tr><td><strong>IPD संख्या:</strong></td><td>{{ formData.ipd_sankhya }}</td></tr>
+    <tr><td><strong>डिलिव्हरी संख्या:</strong></td><td>{{ formData.delivery_sankhya }}</td></tr>
+    <tr><td><strong>कुटुंब कल्याण शस्त्रक्रिया:</strong></td><td>{{ formData.kutumb_kalyan_shasrkriya }}</td></tr>
+    <tr><td><strong>रिफरल संख्या:</strong></td><td>{{ formData.referral_sankhya }}</td></tr>
+
+    <tr><td><strong>तक्रार पुस्तिका:</strong></td><td>{{ formData.takraar_pustika }}</td></tr>
+    <tr><td><strong>नातेवाईकांसाठी सुविधा:</strong></td><td>{{ formData.rugnanchya_natewaikansathi_suvidha }}</td></tr>
+    <tr><td><strong>आजार प्रादुर्भाव:</strong></td><td>{{ formData.parisarat_sathichya_aajarancha_pradurbhav }}</td></tr>
+    <tr><td><strong>मातृ मृत्यू संदर्भ:</strong></td><td>{{ formData.mata_mrutyu_sandarbh }}</td></tr>
+
+    <tr><td><strong>२४ तास अतिआवश्यक सेवा:</strong></td><td>{{ formData._24_taas_atyavashyak_seva }}</td></tr>
+    <tr><td><strong>PAA केंद्र अडचणी:</strong></td><td>{{ formData.paa_kendra_adiadchani }}</td></tr>
+    <tr><td><strong>PAA निकामी वस्तू:</strong></td><td>{{ formData.paa_kendramadhye_nikami_vastu }}</td></tr>
+    <tr><td><strong>VAIA कर्मचारी सेवा:</strong></td><td>{{ formData.vaia_karmachari_atyavashyak_seva }}</td></tr>
+    <tr><td><strong>प्रशिक्षणासाठी कर्मचारी नावे:</strong></td><td>{{ formData.prashikshan_aavashyak_karmcharyache_naav }}</td></tr>
+
+    <tr><td><strong>पिण्याचे पाणी:</strong></td><td>{{ formData.drinking_water }}</td></tr>
+    <tr><td><strong>दूरध्वनी:</strong></td><td>{{ formData.telephone }}</td></tr>
+    <tr><td><strong>जनरेटर/इन्व्हर्टर:</strong></td><td>{{ formData.generator_inverter }}</td></tr>
+    <tr><td><strong>वाहन:</strong></td><td>{{ formData.vehicle }}</td></tr>
+    <tr><td><strong>संगणक व इंटरनेट:</strong></td><td>{{ formData.computer_internet }}</td></tr>
+    <tr><td><strong>सौर वॉटर हीटर:</strong></td><td>{{ formData.solar_water_heater }}</td></tr>
+
+    <tr><td><strong>स्थिती:</strong></td><td>{{ formData.status }}</td></tr>
+  </table>
+
+  <h3>प्रतिमा</h3>
+  <div *ngFor="let img of [formData.image_filename_1, formData.image_filename_2, formData.image_filename_3, formData.image_filename_4]">
+    <img *ngIf="img" [src]="'http://localhost:8080/uploads/' + img" width="300" />
+  </div>
+</div>
+
+<ng-template #loading>
+  <p>अहवाल लोड होत आहे...</p>
+</ng-template>

@@ -1,0 +1,204 @@
+<!-- school-form.component.html -->
+<div class="container py-4"> <!-- Overall container, centers content and adds padding -->
+
+  <!-- Form Section -->
+  <!-- 'justify-content-center' centers the column within this row -->
+  <div class="row justify-content-center mb-5">
+    <!-- 'col-md-10 col-lg-8' defines form width on medium/large screens, centered by parent -->
+    <!-- On screens < md (768px), this becomes full-width, making the form responsive -->
+    <div class="col-md-10 col-lg-8">
+      <form [formGroup]="schoolForm" (ngSubmit)="onSubmit()">
+        <!-- 'card shadow-lg' creates an attractive, elevated card appearance -->
+        <div class="card shadow-lg">
+          <div class="card-body p-4"> <!-- Padding within the card, SCSS adjusts this for mobile -->
+            <h4 class="card-title text-center mb-4">शाळा माहिती फॉर्म</h4>
+
+            <!-- 'row g-3' provides spacing between form field columns -->
+            <div class="row g-3">
+              <!-- Each 'col-md-6' will stack vertically on screens < md (768px) -->
+              <!-- This is the primary responsive behavior for the form fields -->
+              <div class="col-md-6">
+                <label for="date" class="form-label">तारीख</label>
+                <input type="date" id="date" class="form-control" formControlName="date" required />
+                <div *ngIf="f['date'].invalid && (f['date'].dirty || f['date'].touched)" class="text-danger small mt-1">
+                  <span *ngIf="f['date'].errors?.['required']">तारीख आवश्यक आहे.</span>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="organizationName" class="form-label">संस्थेचे नाव</label>
+                <input type="text" id="organizationName" class="form-control" formControlName="organizationName" required />
+                 <div *ngIf="f['organizationName'].invalid && (f['organizationName'].dirty || f['organizationName'].touched)" class="text-danger small mt-1">
+                  <span *ngIf="f['organizationName'].errors?.['required']">संस्थेचे नाव आवश्यक आहे.</span>
+                  <span *ngIf="f['organizationName'].errors?.['minlength']">संस्थेचे नाव किमान ३ अक्षरे असावे.</span>
+                  <span *ngIf="f['organizationName'].errors?.['maxlength']">संस्थेचे नाव १०० अक्षरांपेक्षा जास्त नसावे.</span>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="schoolName" class="form-label">शाळेचे नाव</label>
+                <input type="text" id="schoolName" class="form-control" formControlName="schoolName" required />
+                <div *ngIf="f['schoolName'].invalid && (f['schoolName'].dirty || f['schoolName'].touched)" class="text-danger small mt-1">
+                  <span *ngIf="f['schoolName'].errors?.['required']">शाळेचे नाव आवश्यक आहे.</span>
+                  <span *ngIf="f['schoolName'].errors?.['minlength']">शाळेचे नाव किमान ३ अक्षरे असावे.</span>
+                  <span *ngIf="f['schoolName'].errors?.['maxlength']">शाळेचे नाव १०० अक्षरांपेक्षा जास्त नसावे.</span>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="udiseNumber" class="form-label">UDISE क्रमंक</label>
+                <input type="text" id="udiseNumber" class="form-control" formControlName="udiseNumber" required />
+                <div *ngIf="f['udiseNumber'].invalid && (f['udiseNumber'].dirty || f['udiseNumber'].touched)" class="text-danger small mt-1">
+                  <span *ngIf="f['udiseNumber'].errors?.['required']">UDISE क्रमंक आवश्यक आहे.</span>
+                  <span *ngIf="f['udiseNumber'].errors?.['pattern']">UDISE क्रमंक ११ अंकी असावा.</span>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="googleLocationLink" class="form-label">Google लोकेशन लिंक</label>
+                <input type="url" id="googleLocationLink" class="form-control" formControlName="googleLocationLink" placeholder="https://maps.google.com/..." required />
+                <div *ngIf="f['googleLocationLink'].invalid && (f['googleLocationLink'].dirty || f['googleLocationLink'].touched)" class="text-danger small mt-1">
+                  <span *ngIf="f['googleLocationLink'].errors?.['required']">Google लोकेशन लिंक आवश्यक आहे.</span>
+                  <span *ngIf="f['googleLocationLink'].errors?.['pattern']">कृपया वैध URL प्रविष्ट करा (उदा. https://...).</span>
+                  <span *ngIf="f['googleLocationLink'].errors?.['invalidGoogleLink']">कृपया वैध Google Maps लिंक प्रविष्ट करा (https://maps.google.com/... or https://www.google.com/maps/...).</span>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="category" class="form-label">श्रेणी</label>
+                <select id="category" class="form-select" formControlName="category" required>
+                  <option value="" disabled selected>श्रेणी निवडा</option>
+                  <option value="Primary">प्राथमिक</option>
+                  <option value="Secondary">माध्यमिक</option>
+                  <option value="Higher Secondary">उच्च माध्यमिक</option>
+                </select>
+                <div *ngIf="f['category'].invalid && (f['category'].dirty || f['category'].touched)" class="text-danger small mt-1">
+                  <span *ngIf="f['category'].errors?.['required']">श्रेणी निवडणे आवश्यक आहे.</span>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="fullAddress" class="form-label">पूर्ण पत्ता</label>
+                <textarea id="fullAddress" rows="2" class="form-control" formControlName="fullAddress" required></textarea>
+                <div *ngIf="f['fullAddress'].invalid && (f['fullAddress'].dirty || f['fullAddress'].touched)" class="text-danger small mt-1">
+                  <span *ngIf="f['fullAddress'].errors?.['required']">पूर्ण पत्ता आवश्यक आहे.</span>
+                  <span *ngIf="f['fullAddress'].errors?.['minlength']">पूर्ण पत्ता किमान १० अक्षरे असावा.</span>
+                  <span *ngIf="f['fullAddress'].errors?.['maxlength']">पूर्ण पत्ता २५० अक्षरांपेक्षा जास्त नसावा.</span>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="taluka" class="form-label">तालुका</label>
+                <input type="text" id="taluka" class="form-control" formControlName="taluka" required />
+                <div *ngIf="f['taluka'].invalid && (f['taluka'].dirty || f['taluka'].touched)" class="text-danger small mt-1">
+                  <span *ngIf="f['taluka'].errors?.['required']">तालुका आवश्यक आहे.</span>
+                  <span *ngIf="f['taluka'].errors?.['minlength']">तालुका किमान ३ अक्षरे असावा.</span>
+                  <span *ngIf="f['taluka'].errors?.['maxlength']">तालुका ५० अक्षरांपेक्षा जास्त नसावा.</span>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="district" class="form-label">जिल्हा</label>
+                <input type="text" id="district" class="form-control" formControlName="district" required />
+                <div *ngIf="f['district'].invalid && (f['district'].dirty || f['district'].touched)" class="text-danger small mt-1">
+                  <span *ngIf="f['district'].errors?.['required']">जिल्हा आवश्यक आहे.</span>
+                  <span *ngIf="f['district'].errors?.['minlength']">जिल्हा किमान ३ अक्षरे असावा.</span>
+                  <span *ngIf="f['district'].errors?.['maxlength']">जिल्हा ५० अक्षरांपेक्षा जास्त नसावा.</span>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="pincode" class="form-label">पिनकोड</label>
+                <input type="text" id="pincode" class="form-control" formControlName="pincode" pattern="^\d{6}$" maxlength="6" required />
+                <div *ngIf="f['pincode'].invalid && (f['pincode'].dirty || f['pincode'].touched)" class="text-danger small mt-1">
+                  <span *ngIf="f['pincode'].errors?.['required']">पिनकोड आवश्यक आहे.</span>
+                  <span *ngIf="f['pincode'].errors?.['pattern']">वैध ६-अंकी पिनकोड प्रविष्ट करा.</span>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="headmastersName" class="form-label">मुख्याध्यापकाचे नाव</label>
+                <input type="text" id="headmastersName" class="form-control" formControlName="headmastersName" required />
+                <div *ngIf="f['headmastersName'].invalid && (f['headmastersName'].dirty || f['headmastersName'].touched)" class="text-danger small mt-1">
+                  <span *ngIf="f['headmastersName'].errors?.['required']">मुख्याध्यापकाचे नाव आवश्यक आहे.</span>
+                  <span *ngIf="f['headmastersName'].errors?.['minlength']">मुख्याध्यापकाचे नाव किमान ३ अक्षरे असावे.</span>
+                  <span *ngIf="f['headmastersName'].errors?.['maxlength']">मुख्याध्यापकाचे नाव १०० अक्षरांपेक्षा जास्त नसावे.</span>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="headmastersMobileNumber" class="form-label">मुख्याध्यापक मोबाईल नंबर</label>
+                <input type="tel" id="headmastersMobileNumber" class="form-control" formControlName="headmastersMobileNumber" pattern="^[6-9]\d{9}$" maxlength="10" required />
+                <div *ngIf="f['headmastersMobileNumber'].invalid && (f['headmastersMobileNumber'].dirty || f['headmastersMobileNumber'].touched)" class="text-danger small mt-1">
+                  <span *ngIf="f['headmastersMobileNumber'].errors?.['required']">मोबाईल नंबर आवश्यक आहे.</span>
+                  <span *ngIf="f['headmastersMobileNumber'].errors?.['pattern']">वैध १०-अंकी मोबाईल नंबर प्रविष्ट करा (६, ७, ८, किंवा ९ ने सुरू होणारा).</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <!-- This div uses .button-container which your SCSS makes responsive -->
+            <div class="button-container mt-4 pt-2">
+              <button type="submit" class="btn btn-primary" [disabled]="schoolForm.invalid">सबमिट करा</button>
+              <button type="button" (click)="onReset()" class="btn btn-outline-secondary">रीसेट करा</button>
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Report Table -->
+  <div class="container report-section"> <!-- Bootstrap .container is responsive -->
+    <h4 class="mb-4 report-title text-center">शाळा माहिती अहवाल</h4>
+    <!-- '.table-responsive' is ESSENTIAL for table responsiveness on mobile -->
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover align-middle text-center">
+        <thead class="table-light">
+          <tr>
+            <th>क्र.</th>
+            <th>तारीख</th>
+            <th>संस्थेचे नाव</th>
+            <th>शाळेचे नाव</th>
+            <th>UDISE</th>
+            <th>Google Link</th>
+            <th>श्रेणी</th>
+            <th>पत्ता</th>
+            <th>तालुका</th>
+            <th>जिल्हा</th>
+            <th>पिनकोड</th>
+            <th>मुख्याध्यापक</th>
+            <th>मोबाईल</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="!data || data.length === 0">
+              <td colspan="14" class="text-center p-4 text-muted">कोणताही डेटा उपलब्ध नाही. कृपया फॉर्म भरा.</td>
+          </tr>
+          <tr *ngFor="let item of data; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.date | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ item.organizationName }}</td>
+            <td>{{ item.schoolName }}</td>
+            <td>{{ item.udiseNumber }}</td>
+            <td><a [href]="item.googleLocationLink" target="_blank" rel="noopener noreferrer" title="{{item.googleLocationLink}}">Link</a></td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.fullAddress }}</td>
+            <td>{{ item.taluka }}</td>
+            <td>{{ item.district }}</td>
+            <td>{{ item.pincode }}</td>
+            <td>{{ item.headmastersName }}</td>
+            <td>{{ item.headmastersMobileNumber }}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-warning me-1" (click)="editData(item, i)" title="Edit">✏️</button>
+              <button class="btn btn-sm btn-outline-danger" (click)="deleteData(i)" title="Delete">🗑️</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,12 @@
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  border-color: #dc3545;
+  box-shadow: none;
+}
+
+.card {
+  transition: 0.3s ease-in-out;
+}
+.card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}

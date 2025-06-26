@@ -1,0 +1,87 @@
+<div class="report-container card">
+  <div class="card-header"><h3>आरोग्य केंद्र चेक लिस्ट-रिपोर्ट</h3></div>
+  <div class="card-body">
+    <div class="filter-section">
+      <form [formGroup]="filterForm" class="filter-form">
+        
+        <!-- Taluka Filter -->
+        <div class="form-group">
+          <label for="talukaFilter">तालुका निवडा:</label>
+          <select id="talukaFilter" formControlName="taluka" class="form-control">
+             <option value="">सर्व तालुके</option>
+             <option *ngFor="let taluka of talukas$ | async" [value]="taluka">{{ taluka }}</option>
+          </select>
+        </div>
+
+        <!-- Arogya Kendra (Subcenter) Filter -->
+        <div class="form-group">
+          <label for="kendraFilter">आरोग्य केंद्र निवडा:</label>
+          <select id="kendraFilter" formControlName="kendra" class="form-control">
+             <option value="">सर्व आरोग्य केंद्र</option>
+             <option *ngFor="let kendra of kendras$ | async" [value]="kendra">{{ kendra }}</option>
+          </select>
+        </div>
+
+        <!-- From Date Filter -->
+        <div class="form-group">
+          <label for="fromDate">From:</label>
+          <input type="date" id="fromDate" formControlName="fromDate" class="form-control">
+        </div>
+        
+        <!-- To Date Filter -->
+        <div class="form-group">
+          <label for="toDate">To:</label>
+          <input type="date" id="toDate" formControlName="toDate" class="form-control">
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="filter-actions">
+           <button type="button" (click)="applyFilters()" class="btn btn-show">Show</button>
+           <button type="button" (click)="resetFilters()" class="btn btn-remove">Remove</button>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Data Table -->
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>अ. क्र.</th>
+            <th>PHC नाव (तालुका)</th>
+            <th>उप-केंद्र नाव</th>
+            <th>तपासणीची तारीख</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of filteredData; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.phcName }}</td>
+            <td>{{ item.subcenterName }}</td>
+            <td>{{ item.inspection_date | date:'dd-MM-yyyy' }}</td>
+            <td>
+              <!-- Button logic is handled by the component methods -->
+              <!-- 1. Show if inspection date is in the future -->
+              <button *ngIf="isReportPending(item)" class="btn btn-action btn-pending" disabled>
+                अहवाल प्रलंबित आहे
+              </button>
+              <!-- 2. Show if inspection date is today -->
+              <button *ngIf="canFillReport(item)" (click)="editReport(item)" class="btn btn-action btn-fill">
+                उद्दिष्टांची माहिती भरा
+              </button>
+              <!-- 3. Show if report has already been submitted -->
+              <button *ngIf="canViewReport(item)" (click)="viewReport(item)" class="btn btn-action btn-view">
+                उद्दिष्टांची माहिती पहा
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="!filteredData || filteredData.length === 0">
+             <td colspan="5" class="text-center">No records found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

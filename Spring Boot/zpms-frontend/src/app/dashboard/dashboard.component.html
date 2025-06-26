@@ -1,0 +1,143 @@
+<!-- src/app/dashboard/dashboard.component.html -->
+
+<div class="loading-overlay" *ngIf="isLoading">
+  <div class="spinner"></div>
+  <p>Loading Dashboard...</p>
+</div>
+
+<div class="dashboard-container" *ngIf="!isLoading">
+  <h2 class="main-title">डॅशबोर्ड</h2>
+
+  <!-- Filter Section -->
+  <div class="filter-section card-style">
+    <label>
+      From Date:
+      <input type="date" class="form-control" [(ngModel)]="fromDate" />
+    </label>
+    <label>
+      To Date:
+      <input type="date" class="form-control" [(ngModel)]="toDate" />
+    </label>
+    <button class="btn btn-primary" (click)="applyDateRange()">Apply</button>
+    <button class="btn btn-secondary" (click)="resetFilters()">Reset</button>
+  </div>
+
+  <!-- KPI Cards Section -->
+  <div class="cards-section">
+    <div class="card blue">
+      <h3>एकूण उद्दिष्ट <span>{{ totalTarget }}</span></h3>
+      <div class="card-details">
+        <div>अंगणवाडी: {{ totalData.anganwadi }}</div>
+        <div>शाळा: {{ totalData.school }}</div>
+        <div>आरोग्य: {{ totalData.health }}</div>
+      </div>
+    </div>
+    <div class="card orange">
+      <h3>आजचे उद्दिष्ट <span>{{ todayTarget }}</span></h3>
+      <div class="card-details">
+        <div>अंगणवाडी: {{ todayData.anganwadi }}</div>
+        <div>शाळा: {{ todayData.school }}</div>
+        <div>आरोग्य: {{ todayData.health }}</div>
+      </div>
+    </div>
+    <div class="card green">
+      <h3>पूर्ण उद्दिष्ट <span>{{ completedTarget }}</span></h3>
+      <div class="card-details">
+        <div>अंगणवाडी: {{ completedData.anganwadi }}</div>
+        <div>शाळा: {{ completedData.school }}</div>
+        <div>आरोग्य: {{ completedData.health }}</div>
+      </div>
+    </div>
+    <div class="card lightblue">
+      <h3>येणारी उद्दिष्ट्ये</h3>
+      <div class="card-details">
+        <span>(Data Not Available)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Common Taluka Filter for Charts -->
+  <div class="chart-filter-section card-style">
+    <label for="taluka-filter-main" class="form-label">
+      <h4>चार्टसाठी तालुका निवडा:</h4>
+    </label>
+    <select class="form-select" id="taluka-filter-main" [(ngModel)]="selectedTaluka" (ngModelChange)="onTalukaChange()">
+      <option *ngFor="let taluka of talukaOptions" [value]="taluka">{{ taluka }}</option>
+    </select>
+  </div>
+
+  <!-- First Row of Charts (Visits Overview) -->
+  <div class="row g-4 mt-2" *ngIf="isBrowser">
+    <div class="col-lg-6">
+      <div class="chart-container card-style">
+        <h5 class="chart-title">तालुकानुसार एकूण भेटी</h5>
+        <div class="chart-wrapper">
+          <canvas baseChart [data]="talukaVisitsChartData" [options]="talukaVisitsChartOptions" [type]="barChartType"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="chart-container card-style">
+        <h5 class="chart-title">महिन्यानुसार भेटी ( निवडलेल्या फिल्टरनुसार )</h5>
+        <div class="chart-wrapper">
+          <canvas baseChart [data]="monthlyVisitsChartData" [options]="monthlyVisitsChartOptions" [type]="barChartType"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Second Row of Charts (Anganwadi Details) -->
+  <div class="row g-4 mt-2" *ngIf="isBrowser">
+    <div class="col-lg-6">
+      <div class="chart-container card-style">
+        <h5 class="chart-title">अंगणवाडी इमारत प्रकार: {{ selectedTaluka }}</h5>
+        <div class="chart-wrapper">
+          <canvas baseChart [data]="buildingTypePieChartData" [options]="buildingTypePieChartOptions" [type]="buildingTypePieChartType" [plugins]="buildingTypePieChartPlugins"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="chart-container card-style">
+        <h5 class="chart-title">अंगणवाडी सोई सुविधा: {{ selectedTaluka }}</h5>
+        <div class="chart-wrapper">
+          <canvas baseChart [data]="facilityBarChartData" [options]="facilityBarChartOptions" [type]="barChartType"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Third Row of Charts (NGX Charts for Anganwadi) -->
+  <div class="row g-4 mt-2" *ngIf="isBrowser">
+    <div class="col-lg-6">
+       <div class="chart-container card-style">
+          <h5 class="chart-title">अंगणवाडी इमारत प्रकार (बार चार्ट): {{ selectedTaluka }}</h5>
+          <div class="chart-wrapper">
+             <ngx-charts-bar-vertical
+                [results]="ngxBarChartData"
+                [legend]="true"
+                [legendPosition]="legendPosition"
+                [xAxis]="true"
+                [yAxis]="true"
+                [xAxisLabel]="'इमारत प्रकार'"
+                [yAxisLabel]="'संख्या'">
+             </ngx-charts-bar-vertical>
+          </div>
+       </div>
+    </div>
+    <div class="col-lg-6">
+       <div class="chart-container card-style">
+          <h5 class="chart-title">अंगणवाडी बालक स्थिती: {{ selectedTaluka }}</h5>
+          <div class="chart-wrapper">
+             <ngx-charts-pie-chart
+                [results]="ngxPieChartData"
+                [legend]="true"
+                [legendPosition]="legendPosition"
+                [labels]="true"
+                [doughnut]="false">
+             </ngx-charts-pie-chart>
+          </div>
+       </div>
+    </div>
+  </div>
+
+</div>

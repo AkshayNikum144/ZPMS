@@ -1,0 +1,134 @@
+<!-- src/app/view-inspection/view-inspection.component.html -->
+<div class="report-container">
+  <!-- Action Buttons (hidden during print) -->
+  <div class="actions-toolbar no-print">
+    <button (click)="goBack()" class="btn btn-secondary">
+      ← मागे जा (Back to List)
+    </button>
+    <button (click)="printReport()" class="btn btn-primary">
+      <i class="fas fa-print"></i> प्रिंट करा (Print)
+    </button>
+  </div>
+
+  <!-- Loading and Error States -->
+  <div *ngIf="isLoading" class="status-message">Loading report...</div>
+  <div *ngIf="error" class="status-message alert-danger">{{ error }}</div>
+
+  <!-- Report Content -->
+  <div *ngIf="inspection && !isLoading" class="report-content">
+    <div class="report-header">
+      <h4>अंगणवाडी केंद्र तपासणी अहवाल</h4>
+      <h5>एकात्मिक बाल विकास सेवा योजना, जिल्हा परिषद, कोल्हापूर</h5>
+      <h6>बाल विकास प्रकल्प अधिकारी, प्रकल्प कार्यालय उद्दिष्टाचा दिनांक: {{ inspection.inspectionDate | date:'dd-MM-yyyy' }}</h6>
+    </div>
+
+    <table class="report-table">
+      <thead>
+        <tr>
+          <th>अ.क्र</th>
+          <th>तपासणी विषय</th>
+          <th>तपशील</th>
+          <th>शेरा</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>१</td>
+          <td>गावाचे नाव</td>
+          <td>{{ inspection.villageName }}</td>
+          <td rowspan="14" class="shera-cell">{{ inspection.shera }}</td>
+        </tr>
+        <tr>
+          <td>२</td>
+          <td>अंगणवाडी केंद्राचा क्रमांक</td>
+          <td>{{ inspection.anganwadiNumber }}</td>
+        </tr>
+        <tr>
+          <td>३</td>
+          <td>अंगणवाडी सेविकेचे नाव</td>
+          <td>{{ inspection.workerName }}</td>
+        </tr>
+        <tr>
+          <td>४</td>
+          <td>अंगणवाडी मदतनीस नाव</td>
+          <td>{{ inspection.anganwadiHelperName }}</td>
+        </tr>
+        <tr>
+          <td>५</td>
+          <td>उद्दिष्टाच्या वेळी अंगणवाडीमध्ये सेविका/मदतनीस उपस्थित होत्या का?</td>
+          <td>{{ inspection.workerHelperPresent }}</td>
+        </tr>
+        <tr>
+          <td>६</td>
+          <td>उद्दिष्टाच्या वेळी अंगणवाडी केंद्र व परिसरामध्ये स्वच्छता होती का?</td>
+          <td>{{ inspection.centerSurroundingsClean }}</td>
+        </tr>
+        <tr>
+          <td>६.१</td>
+          <td>अंगणवाडी इमारत (स्वतःची/भाड्याची/इतर)</td>
+          <td>{{ inspection.buildingType }}</td>
+        </tr>
+        <tr>
+          <td>६.२</td>
+          <td>शौचालय (आहे / नाही)</td>
+          <td>{{ inspection.toiletAvailable }}</td>
+        </tr>
+        <tr>
+          <td>६.३</td>
+          <td>शौचालय वापर (होतो / नाही)</td>
+          <td>{{ inspection.toiletUsage }}</td>
+        </tr>
+        <tr>
+          <td>६.४</td>
+          <td>विद्युत पुरवठा (आहे / नाही)</td>
+          <td>{{ inspection.electricitySupply }}</td>
+        </tr>
+        <tr>
+          <td>६.५</td>
+          <td>पिण्याचे पाणी सोय (आहे / नाही)</td>
+          <td>{{ inspection.drinkingWaterSupply }}</td>
+        </tr>
+        <tr>
+          <td>७</td>
+          <td>अंगणवाडी एकूण पट</td>
+          <td>{{ inspection.totalEnrollment }}</td>
+        </tr>
+        <tr>
+          <td>८</td>
+          <td>उद्दिष्टाच्या दिवशी उपस्थित बालक संख्या</td>
+          <td>{{ inspection.childrenPresent }}</td>
+        </tr>
+        <tr>
+          <td>९</td>
+          <td>वजन घेतलेल्या बालकांची संख्या</td>
+          <td>{{ inspection.childrenWeightMeasured }}</td>
+        </tr>
+        <tr>
+          <td>१०</td>
+          <td>सर्वसाधारण (Normal) बालकांची संख्या</td>
+          <td colspan="2">{{ inspection.normalWeightChildren }}</td>
+        </tr>
+        <!-- Add other rows here if they are in a different format -->
+      </tbody>
+    </table>
+
+    <!-- Photos Section -->
+    <div *ngIf="inspection.photo1_filename" class="photos-section no-print">
+      <h5 class="mt-4">तपासणीचे फोटो (Inspection Photos)</h5>
+      <div class="photo-grid">
+        <div *ngIf="inspection.photo1_filename">
+          <img [src]="imageUrlBase + inspection.photo1_filename" alt="Photo 1">
+        </div>
+        <div *ngIf="inspection.photo2_filename">
+          <img [src]="imageUrlBase + inspection.photo2_filename" alt="Photo 2">
+        </div>
+        <div *ngIf="inspection.photo3_filename">
+          <img [src]="imageUrlBase + inspection.photo3_filename" alt="Photo 3">
+        </div>
+        <div *ngIf="inspection.photo4_filename">
+          <img [src]="imageUrlBase + inspection.photo4_filename" alt="Photo 4">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

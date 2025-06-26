@@ -1,0 +1,539 @@
+<div class="form-container my-5">
+  <h2 class="text-center form-title mb-4">{{ currentFormTitle }}</h2> <!-- Dynamic Title -->
+  <form [formGroup]="hospitalForm" (ngSubmit)="onSubmit()" novalidate>
+
+    <!-- Basic Information Section -->
+    <fieldset class="mb-4">
+      <legend>{{ labels.basicInfoSectionTitle }}</legend>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="phcName" class="form-label">{{ labels.phcName }}</label>
+          <input type="text" id="phcName" formControlName="phcName" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['phcName'].errors }">
+          <div *ngIf="submitted && f['phcName'].errors" class="invalid-feedback">
+            <div *ngIf="f['phcName'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['phcName'].errors['maxlength']">{{ labels.maxLengthError.replace('{{value}}', '100') }}</div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="subcenterName" class="form-label">{{ labels.subcenterName }}</label>
+          <input type="text" id="subcenterName" formControlName="subcenterName" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['subcenterName'].errors }">
+          <div *ngIf="submitted && f['subcenterName'].errors" class="invalid-feedback">
+            <div *ngIf="f['subcenterName'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['subcenterName'].errors['maxlength']">{{ labels.maxLengthError.replace('{{value}}', '100') }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="villagePhcId" class="form-label">{{ labels.villagePhcId }}</label>
+          <input type="text" id="villagePhcId" formControlName="villagePhcId" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['villagePhcId'].errors }">
+          <div *ngIf="submitted && f['villagePhcId'].errors" class="invalid-feedback">
+            <div *ngIf="f['villagePhcId'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['villagePhcId'].errors['maxlength']">{{ labels.maxLengthError.replace('{{value}}', '50') }}</div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="monthName" class="form-label">{{ labels.monthName }}</label>
+          <select id="monthName" formControlName="monthName" class="form-select"
+                  [ngClass]="{ 'is-invalid': submitted && f['monthName'].errors }">
+            <option value="" disabled>{{ labels.monthName }} निवडा</option>
+            <option *ngFor="let month of marathiMonths; let i = index" [value]="months[i]">{{ month }} ({{ months[i] }})</option>
+          </select>
+          <div *ngIf="submitted && f['monthName'].errors" class="invalid-feedback">
+            <div *ngIf="f['monthName'].errors['required']">{{ labels.requiredError }}</div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Cataract Data Section -->
+    <fieldset class="mb-4">
+      <legend>{{ labels.cataractSectionTitle }}</legend>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="cataractSuspectedTotal" class="form-label">{{ labels.cataractSuspectedTotal }}</label>
+          <input type="number" id="cataractSuspectedTotal" formControlName="cataractSuspectedTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['cataractSuspectedTotal'].errors }">
+          <div *ngIf="submitted && f['cataractSuspectedTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['cataractSuspectedTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['cataractSuspectedTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="cataractScreenedTotal" class="form-label">{{ labels.cataractScreenedTotal }}</label>
+          <input type="number" id="cataractScreenedTotal" formControlName="cataractScreenedTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['cataractScreenedTotal'].errors }">
+          <div *ngIf="submitted && f['cataractScreenedTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['cataractScreenedTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['cataractScreenedTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="cataractMatureCases" class="form-label">{{ labels.cataractMatureCases }}</label>
+          <input type="number" id="cataractMatureCases" formControlName="cataractMatureCases" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['cataractMatureCases'].errors }">
+          <div *ngIf="submitted && f['cataractMatureCases'].errors" class="invalid-feedback">
+            <div *ngIf="f['cataractMatureCases'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['cataractMatureCases'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+            <label for="cataractImmatureCases" class="form-label">{{ labels.cataractImmatureCases }}</label>
+            <input type="number" id="cataractImmatureCases" formControlName="cataractImmatureCases" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['cataractImmatureCases'].errors }">
+            <div *ngIf="submitted && f['cataractImmatureCases'].errors" class="invalid-feedback">
+                <div *ngIf="f['cataractImmatureCases'].errors['required']">{{ labels.requiredError }}</div>
+                <div *ngIf="f['cataractImmatureCases'].errors['min']">{{ labels.nonNegativeError }}</div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="cataractSurgeryDone" class="form-label">{{ labels.cataractSurgeryDone }}</label>
+            <input type="number" id="cataractSurgeryDone" formControlName="cataractSurgeryDone" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['cataractSurgeryDone'].errors }">
+            <div *ngIf="submitted && f['cataractSurgeryDone'].errors" class="invalid-feedback">
+                <div *ngIf="f['cataractSurgeryDone'].errors['required']">{{ labels.requiredError }}</div>
+                <div *ngIf="f['cataractSurgeryDone'].errors['min']">{{ labels.nonNegativeError }}</div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="cataractFollowupTotal" class="form-label">{{ labels.cataractFollowupTotal }}</label>
+            <input type="number" id="cataractFollowupTotal" formControlName="cataractFollowupTotal" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['cataractFollowupTotal'].errors }">
+            <div *ngIf="submitted && f['cataractFollowupTotal'].errors" class="invalid-feedback">
+                <div *ngIf="f['cataractFollowupTotal'].errors['required']">{{ labels.requiredError }}</div>
+                <div *ngIf="f['cataractFollowupTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+            </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- HTN Data Section (Hypertension) -->
+    <fieldset class="mb-4">
+      <legend>{{ labels.htnSectionTitle }}</legend>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="htnSuspectedTotal" class="form-label">{{ labels.htnSuspectedTotal }}</label>
+          <input type="number" id="htnSuspectedTotal" formControlName="htnSuspectedTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['htnSuspectedTotal'].errors }">
+          <div *ngIf="submitted && f['htnSuspectedTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['htnSuspectedTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['htnSuspectedTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="htnReferredTotal" class="form-label">{{ labels.htnReferredTotal }}</label>
+          <input type="number" id="htnReferredTotal" formControlName="htnReferredTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['htnReferredTotal'].errors }">
+          <div *ngIf="submitted && f['htnReferredTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['htnReferredTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['htnReferredTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="htnOnTreatmentTotal" class="form-label">{{ labels.htnOnTreatmentTotal }}</label>
+          <input type="number" id="htnOnTreatmentTotal" formControlName="htnOnTreatmentTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['htnOnTreatmentTotal'].errors }">
+          <div *ngIf="submitted && f['htnOnTreatmentTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['htnOnTreatmentTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['htnOnTreatmentTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+         <div class="col-md-6 mb-3"> <!-- Adjusted to col-md-6 for two items in row -->
+             <label for="htnOnCounselingNotOnTreatment" class="form-label">{{ labels.htnOnCounselingNotOnTreatment }}</label>
+             <input type="number" id="htnOnCounselingNotOnTreatment" formControlName="htnOnCounselingNotOnTreatment" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['htnOnCounselingNotOnTreatment'].errors }">
+             <div *ngIf="submitted && f['htnOnCounselingNotOnTreatment'].errors" class="invalid-feedback">
+               <div *ngIf="f['htnOnCounselingNotOnTreatment'].errors['required']">{{ labels.requiredError }}</div>
+               <div *ngIf="f['htnOnCounselingNotOnTreatment'].errors['min']">{{ labels.nonNegativeError }}</div>
+             </div>
+         </div>
+         <div class="col-md-6 mb-3"> <!-- Adjusted to col-md-6 for two items in row -->
+             <label for="htnTreatmentAndFollowup" class="form-label">{{ labels.htnTreatmentAndFollowup }}</label>
+             <input type="number" id="htnTreatmentAndFollowup" formControlName="htnTreatmentAndFollowup" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['htnTreatmentAndFollowup'].errors }">
+             <div *ngIf="submitted && f['htnTreatmentAndFollowup'].errors" class="invalid-feedback">
+               <div *ngIf="f['htnTreatmentAndFollowup'].errors['required']">{{ labels.requiredError }}</div>
+               <div *ngIf="f['htnTreatmentAndFollowup'].errors['min']">{{ labels.nonNegativeError }}</div>
+             </div>
+         </div>
+      </div>
+    </fieldset>
+
+    <!-- DM Data Section (Diabetes Mellitus) -->
+    <fieldset class="mb-4">
+      <legend>{{ labels.dmSectionTitle }}</legend>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="dmSuspectedTotal" class="form-label">{{ labels.dmSuspectedTotal }}</label>
+          <input type="number" id="dmSuspectedTotal" formControlName="dmSuspectedTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['dmSuspectedTotal'].errors }">
+          <div *ngIf="submitted && f['dmSuspectedTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['dmSuspectedTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['dmSuspectedTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="dmReferredTotal" class="form-label">{{ labels.dmReferredTotal }}</label>
+          <input type="number" id="dmReferredTotal" formControlName="dmReferredTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['dmReferredTotal'].errors }">
+          <div *ngIf="submitted && f['dmReferredTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['dmReferredTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['dmReferredTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="dmOnTreatmentTotal" class="form-label">{{ labels.dmOnTreatmentTotal }}</label>
+          <input type="number" id="dmOnTreatmentTotal" formControlName="dmOnTreatmentTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['dmOnTreatmentTotal'].errors }">
+          <div *ngIf="submitted && f['dmOnTreatmentTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['dmOnTreatmentTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['dmOnTreatmentTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+         <div class="col-md-6 mb-3">
+             <label for="dmOnCounselingNotOnTreatment" class="form-label">{{ labels.dmOnCounselingNotOnTreatment }}</label>
+             <input type="number" id="dmOnCounselingNotOnTreatment" formControlName="dmOnCounselingNotOnTreatment" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['dmOnCounselingNotOnTreatment'].errors }">
+             <div *ngIf="submitted && f['dmOnCounselingNotOnTreatment'].errors" class="invalid-feedback">
+               <div *ngIf="f['dmOnCounselingNotOnTreatment'].errors['required']">{{ labels.requiredError }}</div>
+               <div *ngIf="f['dmOnCounselingNotOnTreatment'].errors['min']">{{ labels.nonNegativeError }}</div>
+             </div>
+         </div>
+         <div class="col-md-6 mb-3">
+             <label for="dmTreatmentFollowup" class="form-label">{{ labels.dmTreatmentFollowup }}</label>
+             <input type="number" id="dmTreatmentFollowup" formControlName="dmTreatmentFollowup" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['dmTreatmentFollowup'].errors }">
+             <div *ngIf="submitted && f['dmTreatmentFollowup'].errors" class="invalid-feedback">
+               <div *ngIf="f['dmTreatmentFollowup'].errors['required']">{{ labels.requiredError }}</div>
+               <div *ngIf="f['dmTreatmentFollowup'].errors['min']">{{ labels.nonNegativeError }}</div>
+             </div>
+         </div>
+      </div>
+    </fieldset>
+
+    <!-- TB Data Section (Tuberculosis) -->
+    <fieldset class="mb-4">
+      <legend>{{ labels.tbSectionTitle }}</legend>
+       <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="tbSuspectedTotal" class="form-label">{{ labels.tbSuspectedTotal }}</label>
+          <input type="number" id="tbSuspectedTotal" formControlName="tbSuspectedTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['tbSuspectedTotal'].errors }">
+          <div *ngIf="submitted && f['tbSuspectedTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['tbSuspectedTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['tbSuspectedTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="tbReferredForXrayTotal" class="form-label">{{ labels.tbReferredForXrayTotal }}</label>
+          <input type="number" id="tbReferredForXrayTotal" formControlName="tbReferredForXrayTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['tbReferredForXrayTotal'].errors }">
+          <div *ngIf="submitted && f['tbReferredForXrayTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['tbReferredForXrayTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['tbReferredForXrayTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="tbSputumCollectedTotal" class="form-label">{{ labels.tbSputumCollectedTotal }}</label>
+          <input type="number" id="tbSputumCollectedTotal" formControlName="tbSputumCollectedTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['tbSputumCollectedTotal'].errors }">
+          <div *ngIf="submitted && f['tbSputumCollectedTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['tbSputumCollectedTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['tbSputumCollectedTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+         <div class="col-md-6 mb-3">
+             <label for="tbDiagnosedTotal" class="form-label">{{ labels.tbDiagnosedTotal }}</label>
+             <input type="number" id="tbDiagnosedTotal" formControlName="tbDiagnosedTotal" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['tbDiagnosedTotal'].errors }">
+             <div *ngIf="submitted && f['tbDiagnosedTotal'].errors" class="invalid-feedback">
+               <div *ngIf="f['tbDiagnosedTotal'].errors['required']">{{ labels.requiredError }}</div>
+               <div *ngIf="f['tbDiagnosedTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+             </div>
+         </div>
+         <div class="col-md-6 mb-3">
+             <label for="tbOnTreatmentTotal" class="form-label">{{ labels.tbOnTreatmentTotal }}</label>
+             <input type="number" id="tbOnTreatmentTotal" formControlName="tbOnTreatmentTotal" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['tbOnTreatmentTotal'].errors }">
+             <div *ngIf="submitted && f['tbOnTreatmentTotal'].errors" class="invalid-feedback">
+               <div *ngIf="f['tbOnTreatmentTotal'].errors['required']">{{ labels.requiredError }}</div>
+               <div *ngIf="f['tbOnTreatmentTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+             </div>
+         </div>
+      </div>
+    </fieldset>
+
+    <!-- Leprosy Data Section -->
+    <fieldset class="mb-4">
+      <legend>{{ labels.leprosySectionTitle }}</legend>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="leprosySuspectedTotal" class="form-label">{{ labels.leprosySuspectedTotal }}</label>
+          <input type="number" id="leprosySuspectedTotal" formControlName="leprosySuspectedTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['leprosySuspectedTotal'].errors }">
+          <div *ngIf="submitted && f['leprosySuspectedTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['leprosySuspectedTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['leprosySuspectedTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="leprosyReferredTotal" class="form-label">{{ labels.leprosyReferredTotal }}</label>
+          <input type="number" id="leprosyReferredTotal" formControlName="leprosyReferredTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['leprosyReferredTotal'].errors }">
+          <div *ngIf="submitted && f['leprosyReferredTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['leprosyReferredTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['leprosyReferredTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="leprosyDiagnosedTotal" class="form-label">{{ labels.leprosyDiagnosedTotal }}</label>
+          <input type="number" id="leprosyDiagnosedTotal" formControlName="leprosyDiagnosedTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['leprosyDiagnosedTotal'].errors }">
+          <div *ngIf="submitted && f['leprosyDiagnosedTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['leprosyDiagnosedTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['leprosyDiagnosedTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+         <div class="col-md-6 mb-3">
+             <label for="leprosyOnTreatmentTotal" class="form-label">{{ labels.leprosyOnTreatmentTotal }}</label>
+             <input type="number" id="leprosyOnTreatmentTotal" formControlName="leprosyOnTreatmentTotal" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['leprosyOnTreatmentTotal'].errors }">
+             <div *ngIf="submitted && f['leprosyOnTreatmentTotal'].errors" class="invalid-feedback">
+               <div *ngIf="f['leprosyOnTreatmentTotal'].errors['required']">{{ labels.requiredError }}</div>
+               <div *ngIf="f['leprosyOnTreatmentTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+             </div>
+         </div>
+         <div class="col-md-6 mb-3">
+             <label for="leprosyReconstructiveSurgeryTotal" class="form-label">{{ labels.leprosyReconstructiveSurgeryTotal }}</label>
+             <input type="number" id="leprosyReconstructiveSurgeryTotal" formControlName="leprosyReconstructiveSurgeryTotal" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['leprosyReconstructiveSurgeryTotal'].errors }">
+             <div *ngIf="submitted && f['leprosyReconstructiveSurgeryTotal'].errors" class="invalid-feedback">
+               <div *ngIf="f['leprosyReconstructiveSurgeryTotal'].errors['required']">{{ labels.requiredError }}</div>
+               <div *ngIf="f['leprosyReconstructiveSurgeryTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+             </div>
+         </div>
+      </div>
+    </fieldset>
+
+    <!-- Oral Cancer Data Section -->
+    <fieldset class="mb-4">
+      <legend>{{ labels.oralCancerSectionTitle }}</legend>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="oralCancerSuspectedTotal" class="form-label">{{ labels.oralCancerSuspectedTotal }}</label>
+          <input type="number" id="oralCancerSuspectedTotal" formControlName="oralCancerSuspectedTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['oralCancerSuspectedTotal'].errors }">
+          <div *ngIf="submitted && f['oralCancerSuspectedTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['oralCancerSuspectedTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['oralCancerSuspectedTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="oralCancerReferredTotal" class="form-label">{{ labels.oralCancerReferredTotal }}</label>
+          <input type="number" id="oralCancerReferredTotal" formControlName="oralCancerReferredTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['oralCancerReferredTotal'].errors }">
+          <div *ngIf="submitted && f['oralCancerReferredTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['oralCancerReferredTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['oralCancerReferredTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="oralCancerDiagnosedTotal" class="form-label">{{ labels.oralCancerDiagnosedTotal }}</label>
+          <input type="number" id="oralCancerDiagnosedTotal" formControlName="oralCancerDiagnosedTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['oralCancerDiagnosedTotal'].errors }">
+          <div *ngIf="submitted && f['oralCancerDiagnosedTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['oralCancerDiagnosedTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['oralCancerDiagnosedTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+         <div class="col-md-6 mb-3">
+             <label for="oralCancerChemoTherapy" class="form-label">{{ labels.oralCancerChemoTherapy }}</label>
+             <input type="number" id="oralCancerChemoTherapy" formControlName="oralCancerChemoTherapy" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['oralCancerChemoTherapy'].errors }">
+             <div *ngIf="submitted && f['oralCancerChemoTherapy'].errors" class="invalid-feedback">
+               <div *ngIf="f['oralCancerChemoTherapy'].errors['required']">{{ labels.requiredError }}</div>
+               <div *ngIf="f['oralCancerChemoTherapy'].errors['min']">{{ labels.nonNegativeError }}</div>
+             </div>
+         </div>
+         <div class="col-md-6 mb-3">
+             <label for="oralCancerSurgeryDone" class="form-label">{{ labels.oralCancerSurgeryDone }}</label>
+             <input type="number" id="oralCancerSurgeryDone" formControlName="oralCancerSurgeryDone" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['oralCancerSurgeryDone'].errors }">
+             <div *ngIf="submitted && f['oralCancerSurgeryDone'].errors" class="invalid-feedback">
+               <div *ngIf="f['oralCancerSurgeryDone'].errors['required']">{{ labels.requiredError }}</div>
+               <div *ngIf="f['oralCancerSurgeryDone'].errors['min']">{{ labels.nonNegativeError }}</div>
+             </div>
+         </div>
+      </div>
+    </fieldset>
+
+    <!-- Breast Cancer Data Section -->
+    <fieldset class="mb-4">
+      <legend>{{ labels.breastCancerSectionTitle }}</legend>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="breastCancerSuspectedTotal" class="form-label">{{ labels.breastCancerSuspectedTotal }}</label>
+          <input type="number" id="breastCancerSuspectedTotal" formControlName="breastCancerSuspectedTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['breastCancerSuspectedTotal'].errors }">
+          <div *ngIf="submitted && f['breastCancerSuspectedTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['breastCancerSuspectedTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['breastCancerSuspectedTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="breastCancerReferredTotal" class="form-label">{{ labels.breastCancerReferredTotal }}</label>
+          <input type="number" id="breastCancerReferredTotal" formControlName="breastCancerReferredTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['breastCancerReferredTotal'].errors }">
+          <div *ngIf="submitted && f['breastCancerReferredTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['breastCancerReferredTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['breastCancerReferredTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="breastCancerDiagnosedTotal" class="form-label">{{ labels.breastCancerDiagnosedTotal }}</label>
+          <input type="number" id="breastCancerDiagnosedTotal" formControlName="breastCancerDiagnosedTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['breastCancerDiagnosedTotal'].errors }">
+          <div *ngIf="submitted && f['breastCancerDiagnosedTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['breastCancerDiagnosedTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['breastCancerDiagnosedTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+         <div class="col-md-6 mb-3">
+             <label for="breastCancerChemoTherapy" class="form-label">{{ labels.breastCancerChemoTherapy }}</label>
+             <input type="number" id="breastCancerChemoTherapy" formControlName="breastCancerChemoTherapy" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['breastCancerChemoTherapy'].errors }">
+             <div *ngIf="submitted && f['breastCancerChemoTherapy'].errors" class="invalid-feedback">
+               <div *ngIf="f['breastCancerChemoTherapy'].errors['required']">{{ labels.requiredError }}</div>
+               <div *ngIf="f['breastCancerChemoTherapy'].errors['min']">{{ labels.nonNegativeError }}</div>
+             </div>
+         </div>
+         <div class="col-md-6 mb-3">
+             <label for="breastCancerSurgeryDone" class="form-label">{{ labels.breastCancerSurgeryDone }}</label>
+             <input type="number" id="breastCancerSurgeryDone" formControlName="breastCancerSurgeryDone" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['breastCancerSurgeryDone'].errors }">
+             <div *ngIf="submitted && f['breastCancerSurgeryDone'].errors" class="invalid-feedback">
+               <div *ngIf="f['breastCancerSurgeryDone'].errors['required']">{{ labels.requiredError }}</div>
+               <div *ngIf="f['breastCancerSurgeryDone'].errors['min']">{{ labels.nonNegativeError }}</div>
+             </div>
+         </div>
+      </div>
+    </fieldset>
+
+    <!-- Cervical Cancer Data Section -->
+    <fieldset class="mb-4">
+      <legend>{{ labels.cervicalCancerSectionTitle }}</legend>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="cervicalCancerSuspectedTotal" class="form-label">{{ labels.cervicalCancerSuspectedTotal }}</label>
+          <input type="number" id="cervicalCancerSuspectedTotal" formControlName="cervicalCancerSuspectedTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['cervicalCancerSuspectedTotal'].errors }">
+          <div *ngIf="submitted && f['cervicalCancerSuspectedTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['cervicalCancerSuspectedTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['cervicalCancerSuspectedTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="cervicalCancerReferredTotal" class="form-label">{{ labels.cervicalCancerReferredTotal }}</label>
+          <input type="number" id="cervicalCancerReferredTotal" formControlName="cervicalCancerReferredTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['cervicalCancerReferredTotal'].errors }">
+          <div *ngIf="submitted && f['cervicalCancerReferredTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['cervicalCancerReferredTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['cervicalCancerReferredTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="cervicalCancerDiagnosedTotal" class="form-label">{{ labels.cervicalCancerDiagnosedTotal }}</label>
+          <input type="number" id="cervicalCancerDiagnosedTotal" formControlName="cervicalCancerDiagnosedTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['cervicalCancerDiagnosedTotal'].errors }">
+          <div *ngIf="submitted && f['cervicalCancerDiagnosedTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['cervicalCancerDiagnosedTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['cervicalCancerDiagnosedTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+         <div class="col-md-6 mb-3">
+             <label for="cervicalCancerChemoTherapy" class="form-label">{{ labels.cervicalCancerChemoTherapy }}</label>
+             <input type="number" id="cervicalCancerChemoTherapy" formControlName="cervicalCancerChemoTherapy" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['cervicalCancerChemoTherapy'].errors }">
+             <div *ngIf="submitted && f['cervicalCancerChemoTherapy'].errors" class="invalid-feedback">
+               <div *ngIf="f['cervicalCancerChemoTherapy'].errors['required']">{{ labels.requiredError }}</div>
+               <div *ngIf="f['cervicalCancerChemoTherapy'].errors['min']">{{ labels.nonNegativeError }}</div>
+             </div>
+         </div>
+         <div class="col-md-6 mb-3">
+             <label for="cervicalCancerSurgeryDone" class="form-label">{{ labels.cervicalCancerSurgeryDone }}</label>
+             <input type="number" id="cervicalCancerSurgeryDone" formControlName="cervicalCancerSurgeryDone" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['cervicalCancerSurgeryDone'].errors }">
+             <div *ngIf="submitted && f['cervicalCancerSurgeryDone'].errors" class="invalid-feedback">
+               <div *ngIf="f['cervicalCancerSurgeryDone'].errors['required']">{{ labels.requiredError }}</div>
+               <div *ngIf="f['cervicalCancerSurgeryDone'].errors['min']">{{ labels.nonNegativeError }}</div>
+             </div>
+         </div>
+      </div>
+    </fieldset>
+
+    <!-- HPLC Data Section -->
+    <fieldset class="mb-4">
+      <legend>{{ labels.hplcSectionTitle }}</legend>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="hplcSamplesSentTotal" class="form-label">{{ labels.hplcSamplesSentTotal }}</label>
+          <input type="number" id="hplcSamplesSentTotal" formControlName="hplcSamplesSentTotal" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['hplcSamplesSentTotal'].errors }">
+          <div *ngIf="submitted && f['hplcSamplesSentTotal'].errors" class="invalid-feedback">
+            <div *ngIf="f['hplcSamplesSentTotal'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['hplcSamplesSentTotal'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="hplcAsCarrierCount" class="form-label">{{ labels.hplcAsCarrierCount }}</label>
+          <input type="number" id="hplcAsCarrierCount" formControlName="hplcAsCarrierCount" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['hplcAsCarrierCount'].errors }">
+          <div *ngIf="submitted && f['hplcAsCarrierCount'].errors" class="invalid-feedback">
+            <div *ngIf="f['hplcAsCarrierCount'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['hplcAsCarrierCount'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="hplcSsCarrierCount" class="form-label">{{ labels.hplcSsCarrierCount }}</label>
+          <input type="number" id="hplcSsCarrierCount" formControlName="hplcSsCarrierCount" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f['hplcSsCarrierCount'].errors }">
+          <div *ngIf="submitted && f['hplcSsCarrierCount'].errors" class="invalid-feedback">
+            <div *ngIf="f['hplcSsCarrierCount'].errors['required']">{{ labels.requiredError }}</div>
+            <div *ngIf="f['hplcSsCarrierCount'].errors['min']">{{ labels.nonNegativeError }}</div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Submit and Reset Buttons -->
+    <div class="d-flex justify-content-center gap-3 mt-5">
+      <button type="submit" class="btn btn-primary btn-lg px-5" [disabled]="hospitalForm.invalid && submitted">
+        {{ isEditMode ? labels.updateButton : labels.submitButton }}
+      </button>
+      <button type="button" class="btn btn-outline-secondary btn-lg px-5" (click)="onReset()">{{ labels.resetButton }}</button>
+    </div>
+
+  </form>
+</div>

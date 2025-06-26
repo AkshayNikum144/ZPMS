@@ -1,0 +1,22 @@
+<!-- <div class="sidebar " >
+    <ul>
+        <li *ngFor="let item of menuItems" (click)="setActive(item.label)" [class.active]="activeItem === item.label">
+            <i class="fas" [ngClass]="item.icon"></i>
+            <span>{{ item.label }}</span>
+        </li>
+    </ul>
+</div>
+
+
+ -->
+<!-- src/app/sidebar/sidebar.component.html -->
+<div class="sidebar" [class.open-mobile]="isOpenOnMobile">
+  <ul>
+    <li *ngFor="let item of menuItems"
+        [class.active]="activeItem === item.label"
+        (click)="handleItemClick(item)">
+      <i class="fas" [ngClass]="item.icon"></i>
+      <span>{{ item.label }}</span>
+    </li>
+  </ul>
+</div>
