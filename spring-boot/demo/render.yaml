@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: zpms-backend
-    env: java
-    rootDir: spring-boot/demo
-    buildCommand: ./mvnw clean install
-    startCommand: java -jar target/demo-0.0.1-SNAPSHOT.jar
-    plan: free
