@@ -1,9 +1,9 @@
 # Stage 1: Build Spring Boot App
 FROM maven:3.9.6-eclipse-temurin-17 AS builder
+
 WORKDIR /app
-COPY pom.xml mvnw .              
-COPY .mvn .mvn                  
-COPY src src                    
+COPY pom.xml .
+COPY src src
 RUN mvn clean package -DskipTests
 
 # Stage 2: Runtime with MySQL and Spring Boot
@@ -17,20 +17,19 @@ RUN apt-get update && \
     supervisor && \
     rm -rf /var/lib/apt/lists/*
 
-# Configure MySQL and create empty DB
-RUN service mysql start && \
-    mysql --execute="ALTER USER 'root'@'localhost' IDENTIFIED BY 'root@123';" && \
-    mysql --execute="CREATE DATABASE IF NOT EXISTS ZPMS;" && \
-    mysql --execute="FLUSH PRIVILEGES;"
+# Set environment variables
+ENV DB_USER=root
+ENV DB_PASS=root@123
+ENV DB_NAME=ZPMS
 
-# Copy Spring Boot JAR
+# Copy Spring Boot JAR from build stage
 COPY --from=builder /app/target/demo-0.0.1-SNAPSHOT.jar /app/app.jar
 
-# Copy Supervisor config
+# Copy Supervisor configuration file
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Expose MySQL and App ports
+# Expose ports: 3306 for MySQL, 8080 for Spring Boot
 EXPOSE 3306 8080
 
-# Start both MySQL and Spring Boot using Supervisor
+# Start Supervisor (which manages MySQL and Spring Boot)
 CMD ["/usr/bin/supervisord", "-n"]
